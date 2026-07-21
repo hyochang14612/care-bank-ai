@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-brand: #00a878;
+  --color-brand-dark: #00895f;
+  --color-mint: #dff8ef;
+  --color-coral: #ff7a59;
+  --color-coral-soft: #ffece6;
+  --color-blue: #4f8cff;
+  --color-blue-soft: #eaf1ff;
+  --color-ink: #1f2937;
+  --color-subtle: #6b7280;
+  --color-line: #e5e7eb;
+
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px -12px rgba(17, 24, 39, 0.12);
+  --shadow-card-hover: 0 4px 10px rgba(17, 24, 39, 0.06), 0 16px 32px -12px rgba(17, 24, 39, 0.16);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8dce2;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
