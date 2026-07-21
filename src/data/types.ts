@@ -68,3 +68,20 @@ export interface NewsItem {
   org: string
   icon: string
 }
+
+export interface DonorProfile {
+  name: string
+  totalPoints: number
+  recentDonation: string
+  recentRecipient: string
+  thankYouMessage: string
+  thankYouFrom: string
+}
+
+export interface BeneficiaryProfile {
+  alias: string
+  resourceTitle: string
+  provider: string
+  schedule: string
+  worker: string
+}

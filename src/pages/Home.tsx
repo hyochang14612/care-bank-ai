@@ -4,11 +4,14 @@ import { ResourceCard } from '../components/ResourceCard'
 import { MatchCard } from '../components/MatchCard'
 import { NoticeBadge } from '../components/NoticeBadge'
 import { SectionHeading } from '../components/SectionHeading'
+import { ProblemSolution } from '../components/ProblemSolution'
 import { dailyStats, resources, matchResults } from '../data/mock'
 
 export function Home() {
   return (
     <div className="space-y-10">
+      <ProblemSolution />
+
       <section className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand to-brand-dark px-6 py-8 text-white sm:px-10 sm:py-10">
         <p className="text-sm font-medium text-mint">우리동네 통합돌봄 뱅크</p>
         <h1 className="mt-2 max-w-xl text-2xl font-bold leading-snug sm:text-3xl">
@@ -37,21 +40,39 @@ export function Home() {
         </div>
       </section>
 
-      <Link
-        to="/demo"
-        className="flex items-center justify-between gap-4 rounded-3xl border border-coral-soft bg-coral-soft/60 px-5 py-4 transition hover:bg-coral-soft sm:px-6"
-      >
-        <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-coral text-lg text-white">
-            🎬
-          </span>
-          <div>
-            <p className="font-semibold text-ink">후원자 등록 → AI 매칭 → 대상자 연결 → 포인트 적립</p>
-            <p className="text-sm text-subtle">전체 나눔 흐름을 직접 눌러보며 체험해보세요</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link
+          to="/demo"
+          className="flex items-center justify-between gap-4 rounded-3xl border border-coral-soft bg-coral-soft/60 px-5 py-4 transition hover:bg-coral-soft"
+        >
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-coral text-lg text-white">
+              🎬
+            </span>
+            <div>
+              <p className="font-semibold text-ink">후원자 등록 → AI 매칭 → 대상자 연결 → 포인트 적립</p>
+              <p className="text-sm text-subtle">전체 나눔 흐름을 직접 눌러보며 체험해보세요</p>
+            </div>
           </div>
-        </div>
-        <span className="shrink-0 text-sm font-semibold text-coral">시작하기 →</span>
-      </Link>
+          <span className="shrink-0 text-sm font-semibold text-coral">시작 →</span>
+        </Link>
+
+        <Link
+          to="/pitch"
+          className="flex items-center justify-between gap-4 rounded-3xl border border-blue-soft bg-blue-soft/60 px-5 py-4 transition hover:bg-blue-soft"
+        >
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue text-lg text-white">
+              📽
+            </span>
+            <div>
+              <p className="font-semibold text-ink">3분 발표모드</p>
+              <p className="text-sm text-subtle">문제 제기부터 라이브 데모까지 순서대로 보여드려요</p>
+            </div>
+          </div>
+          <span className="shrink-0 text-sm font-semibold text-blue">시작 →</span>
+        </Link>
+      </div>
 
       <section>
         <SectionHeading title="오늘의 나눔 현황" description="실시간으로 업데이트되는 우리 지역 나눔 지표예요" />

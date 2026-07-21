@@ -8,6 +8,8 @@ import { Connections } from './pages/Connections'
 import { PointBank } from './pages/PointBank'
 import { News } from './pages/News'
 import { Demo } from './pages/Demo'
+import { Roles } from './pages/Roles'
+import { Pitch } from './pages/Pitch'
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="points" element={<PointBank />} />
           <Route path="news" element={<News />} />
           <Route path="demo" element={<Demo />} />
+          <Route path="roles" element={<Roles />} />
+          <Route path="pitch" element={<Pitch />} />
         </Route>
       </Routes>
     </AppDataProvider>

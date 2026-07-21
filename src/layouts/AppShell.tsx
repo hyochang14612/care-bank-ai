@@ -53,10 +53,35 @@ export function AppShell() {
                 {item.label}
               </NavLink>
             ))}
+            <span className="mx-1 h-5 w-px bg-line" />
+            <NavLink
+              to="/roles"
+              className={({ isActive }) =>
+                `flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  isActive
+                    ? 'bg-blue text-white'
+                    : 'bg-blue-soft text-blue hover:bg-blue hover:text-white'
+                }`
+              }
+            >
+              🎭 역할별화면
+            </NavLink>
+            <NavLink
+              to="/pitch"
+              className={({ isActive }) =>
+                `flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  isActive
+                    ? 'bg-blue text-white'
+                    : 'bg-blue-soft text-blue hover:bg-blue hover:text-white'
+                }`
+              }
+            >
+              📽 발표모드
+            </NavLink>
             <NavLink
               to="/demo"
               className={({ isActive }) =>
-                `ml-2 flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                `flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
                   isActive
                     ? 'bg-coral text-white'
                     : 'bg-coral-soft text-coral hover:bg-coral hover:text-white'

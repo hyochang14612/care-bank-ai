@@ -4,6 +4,7 @@ import { SectionHeading } from '../components/SectionHeading'
 import { Stepper } from '../components/Stepper'
 import { NoticeBadge } from '../components/NoticeBadge'
 import { Tag } from '../components/Tag'
+import { AiMatchingVisual } from '../components/AiMatchingVisual'
 import { useAppData } from '../context/AppDataContext'
 import type { ResourceCategory } from '../data/types'
 
@@ -53,7 +54,13 @@ export function Demo() {
   const [connected, setConnected] = useState(false)
   const [pointsAwarded, setPointsAwarded] = useState(false)
 
-  const matchScore = Math.min(97, Math.max(80, 86 + donor.quantity))
+  const factors = [
+    { label: '지역 근접성', value: donor.location.includes('효창') ? 95 : 82 },
+    { label: '시간 일치도', value: /주말|오전/.test(donor.availableTime) ? 90 : 84 },
+    { label: '욕구 일치도', value: ['위생관리', '정서지원'].includes(donor.category) ? 94 : 78 },
+    { label: '자원 신뢰도', value: 88 },
+  ]
+  const matchScore = Math.round(factors.reduce((sum, f) => sum + f.value, 0) / factors.length)
   const points = Math.min(200, 80 + donor.quantity * 10)
   const categoryIcon = categories.find((c) => c.value === donor.category)?.icon ?? '💚'
 
@@ -195,21 +202,19 @@ export function Demo() {
 
       {step === 2 && (
         <div className="space-y-5 rounded-3xl bg-surface p-6 shadow-card">
-          {matching ? (
-            <div className="flex flex-col items-center gap-3 py-12 text-center">
-              <span className="text-3xl animate-pulse">✨</span>
-              <p className="font-semibold text-ink">AI가 지역 사례와 자원을 비교하는 중이에요...</p>
-              <p className="text-sm text-subtle">
-                등록하신 '{donor.resourceTitle}' 자원과 어울리는 이웃을 찾고 있어요
-              </p>
-            </div>
-          ) : (
-            <>
-              <div>
-                <h3 className="font-bold text-ink">2. AI 매칭 결과</h3>
-                <p className="mt-1 text-sm text-subtle">사례와 자원을 분석해 가장 적합한 이웃을 찾았어요</p>
-              </div>
+          <div>
+            <h3 className="font-bold text-ink">2. AI 매칭</h3>
+            <p className="mt-1 text-sm text-subtle">
+              {matching
+                ? `등록하신 '${donor.resourceTitle}' 자원과 어울리는 이웃을 찾고 있어요...`
+                : '사례와 자원을 분석해 가장 적합한 이웃을 찾았어요'}
+            </p>
+          </div>
 
+          <AiMatchingVisual factors={factors} score={matchScore} analyzing={matching} />
+
+          {!matching && (
+            <>
               <div className="rounded-2xl bg-bg p-5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-medium text-subtle">{demoCase.caseId}</span>
@@ -219,13 +224,6 @@ export function Demo() {
                 </div>
                 <p className="mt-2 text-sm text-subtle">{demoCase.alias}</p>
                 <h4 className="mt-0.5 font-semibold text-ink">{donor.resourceTitle}</h4>
-
-                <div className="mt-3 flex items-center gap-2">
-                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-line">
-                    <div className="h-full rounded-full bg-brand" style={{ width: `${matchScore}%` }} />
-                  </div>
-                  <span className="text-sm font-bold text-brand-dark">{matchScore}%</span>
-                </div>
 
                 <div className="mt-4 space-y-1.5">
                   <p className="text-xs font-medium text-subtle">추천 이유</p>

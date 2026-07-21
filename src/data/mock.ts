@@ -1,6 +1,8 @@
 import type {
+  BeneficiaryProfile,
   Connection,
   DailyStat,
+  DonorProfile,
   MatchResult,
   NewsItem,
   PointRecord,
@@ -242,3 +244,20 @@ export const newsItems: NewsItem[] = [
     icon: '✨',
   },
 ]
+
+export const donorProfile: DonorProfile = {
+  name: '청년나눔단 이○○',
+  totalPoints: 460,
+  recentDonation: '동행 목욕 봉사 3회',
+  recentRecipient: '이○○ 어르신',
+  thankYouMessage: '따뜻한 나눔 감사해요 :) 덕분에 편하게 씻으실 수 있었어요.',
+  thankYouFrom: '이○○ 어르신 보호자',
+}
+
+export const beneficiaryProfile: BeneficiaryProfile = {
+  alias: '이○○ 어르신',
+  resourceTitle: '동행 목욕 봉사 3회',
+  provider: '청년나눔단',
+  schedule: '이번 주 화요일 오전 10시',
+  worker: '정사회복지사',
+}
