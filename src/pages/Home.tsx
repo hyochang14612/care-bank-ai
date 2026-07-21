@@ -28,8 +28,30 @@ export function Home() {
           >
             AI 매칭 결과 보기
           </Link>
+          <Link
+            to="/demo"
+            className="rounded-full bg-coral px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95"
+          >
+            🎬 라이브 데모 체험하기
+          </Link>
         </div>
       </section>
+
+      <Link
+        to="/demo"
+        className="flex items-center justify-between gap-4 rounded-3xl border border-coral-soft bg-coral-soft/60 px-5 py-4 transition hover:bg-coral-soft sm:px-6"
+      >
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-coral text-lg text-white">
+            🎬
+          </span>
+          <div>
+            <p className="font-semibold text-ink">후원자 등록 → AI 매칭 → 대상자 연결 → 포인트 적립</p>
+            <p className="text-sm text-subtle">전체 나눔 흐름을 직접 눌러보며 체험해보세요</p>
+          </div>
+        </div>
+        <span className="shrink-0 text-sm font-semibold text-coral">시작하기 →</span>
+      </Link>
 
       <section>
         <SectionHeading title="오늘의 나눔 현황" description="실시간으로 업데이트되는 우리 지역 나눔 지표예요" />

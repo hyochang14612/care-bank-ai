@@ -1,9 +1,10 @@
 import { SectionHeading } from '../components/SectionHeading'
-import { pointRecords } from '../data/mock'
-
-const totalPoints = pointRecords.reduce((sum, record) => sum + record.points, 0)
+import { useAppData } from '../context/AppDataContext'
 
 export function PointBank() {
+  const { pointRecords } = useAppData()
+  const totalPoints = pointRecords.reduce((sum, record) => sum + record.points, 0)
+
   return (
     <div className="space-y-6">
       <SectionHeading title="나눔통장" description="지금까지 쌓아온 참여와 나눔의 기록이에요" />
@@ -36,6 +37,11 @@ export function PointBank() {
                     {record.type}
                   </span>
                   <span className="text-xs text-subtle">{record.date}</span>
+                  {record.id.startsWith('demo-') && (
+                    <span className="rounded-full bg-coral-soft px-2 py-0.5 text-[10px] font-semibold text-coral">
+                      방금 적립됨
+                    </span>
+                  )}
                 </div>
                 <h3 className="mt-1 text-sm font-semibold text-ink">{record.title}</h3>
                 <p className="text-xs text-subtle">{record.memo}</p>

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const navItems = [
   { to: '/', label: '홈', icon: '🏠', end: true },
@@ -36,7 +36,7 @@ export function AppShell() {
             </button>
           </div>
 
-          <nav className="hidden gap-1 sm:flex">
+          <nav className="hidden items-center gap-1 sm:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -53,6 +53,18 @@ export function AppShell() {
                 {item.label}
               </NavLink>
             ))}
+            <NavLink
+              to="/demo"
+              className={({ isActive }) =>
+                `ml-2 flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  isActive
+                    ? 'bg-coral text-white'
+                    : 'bg-coral-soft text-coral hover:bg-coral hover:text-white'
+                }`
+              }
+            >
+              🎬 라이브 데모
+            </NavLink>
           </nav>
         </div>
       </header>
@@ -60,6 +72,13 @@ export function AppShell() {
       <main className="mx-auto max-w-6xl px-5 pb-24 pt-6 sm:px-8 sm:pb-10">
         <Outlet />
       </main>
+
+      <Link
+        to="/demo"
+        className="fixed bottom-20 right-4 z-40 flex items-center gap-1.5 rounded-full bg-coral px-4 py-2.5 text-sm font-semibold text-white shadow-card-hover sm:hidden"
+      >
+        🎬 데모
+      </Link>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 flex justify-around border-t border-line bg-surface/95 px-1 py-2 backdrop-blur sm:hidden">
         {navItems.map((item) => (

@@ -1,5 +1,5 @@
 import { SectionHeading } from '../components/SectionHeading'
-import { connections } from '../data/mock'
+import { useAppData } from '../context/AppDataContext'
 import type { ConnectionStatus } from '../data/types'
 
 const statusStyle: Record<ConnectionStatus, string> = {
@@ -10,6 +10,8 @@ const statusStyle: Record<ConnectionStatus, string> = {
 }
 
 export function Connections() {
+  const { connections } = useAppData()
+
   return (
     <div className="space-y-6">
       <SectionHeading title="연계관리" description="진행 중인 연계 사례를 한눈에 확인하세요" />
@@ -25,7 +27,14 @@ export function Connections() {
                 {connection.worker.slice(0, 1)}
               </div>
               <div>
-                <p className="text-xs text-subtle">{connection.caseId}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-xs text-subtle">{connection.caseId}</p>
+                  {connection.id.startsWith('demo-') && (
+                    <span className="rounded-full bg-coral-soft px-2 py-0.5 text-[10px] font-semibold text-coral">
+                      방금 추가됨
+                    </span>
+                  )}
+                </div>
                 <h3 className="font-semibold text-ink">
                   {connection.applicantAlias} · {connection.resourceTitle}
                 </h3>
