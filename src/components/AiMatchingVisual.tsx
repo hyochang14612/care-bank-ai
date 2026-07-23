@@ -1,6 +1,9 @@
-interface Factor {
+import type { MatchGrade } from '../data/types'
+import { GradeBadge } from './GradeBadge'
+
+interface Criterion {
   label: string
-  value: number
+  matched: boolean
 }
 
 function PipelineNode({
@@ -27,45 +30,46 @@ function PipelineNode({
 }
 
 export function AiMatchingVisual({
-  factors,
-  score,
+  criteria,
+  grade,
   analyzing,
 }: {
-  factors: Factor[]
-  score: number
+  criteria: Criterion[]
+  grade: MatchGrade
   analyzing: boolean
 }) {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between gap-2">
-        <PipelineNode icon="🙋" label="후원 자원" />
+        <PipelineNode icon="🙋" label="등록 자원" />
         <div className={`h-0.5 flex-1 rounded-full ${analyzing ? 'bg-line' : 'bg-brand'}`} />
         <PipelineNode icon="🤖" label="AI 매칭 엔진" active={analyzing} />
         <div className={`h-0.5 flex-1 rounded-full ${analyzing ? 'bg-line' : 'bg-brand'}`} />
         <PipelineNode icon="🧓" label="대상자 후보" />
       </div>
 
-      <div className="space-y-2.5">
-        {factors.map((factor) => (
-          <div key={factor.label}>
-            <div className="mb-1 flex items-center justify-between text-xs text-subtle">
-              <span>{factor.label}</span>
-              <span className="font-medium text-ink">{analyzing ? '분석 중' : `${factor.value}%`}</span>
-            </div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-bg">
-              <div
-                className="h-full rounded-full bg-brand transition-all duration-700 ease-out"
-                style={{ width: analyzing ? '12%' : `${factor.value}%` }}
-              />
-            </div>
+      <div className="space-y-2">
+        {criteria.map((c) => (
+          <div
+            key={c.label}
+            className="flex items-center justify-between rounded-xl bg-bg px-3.5 py-2.5 text-sm"
+          >
+            <span className="text-ink">{c.label}</span>
+            {analyzing ? (
+              <span className="text-xs text-subtle">확인 중...</span>
+            ) : c.matched ? (
+              <span className="text-xs font-semibold text-brand-dark">✅ 일치</span>
+            ) : (
+              <span className="text-xs font-semibold text-subtle">− 해당 없음</span>
+            )}
           </div>
         ))}
       </div>
 
       {!analyzing && (
-        <div className="rounded-2xl bg-mint py-3 text-center">
-          <p className="text-xs text-brand-dark">종합 적합도</p>
-          <p className="text-2xl font-bold text-brand-dark">{score}%</p>
+        <div className="flex flex-col items-center gap-2 rounded-2xl bg-bg py-4 text-center">
+          <p className="text-xs text-subtle">AI 추천 결과 (사회복지사 최종 확인 필요)</p>
+          <GradeBadge grade={grade} />
         </div>
       )}
     </div>

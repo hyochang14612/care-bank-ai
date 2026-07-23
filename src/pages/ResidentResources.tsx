@@ -14,8 +14,8 @@ const categories: (ResourceCategory | '전체')[] = [
   '교육문화',
 ]
 
-export function Market() {
-  const [active, setActive] = useState<(ResourceCategory | '전체')>('전체')
+export function ResidentResources() {
+  const [active, setActive] = useState<ResourceCategory | '전체'>('전체')
 
   const filtered = useMemo(
     () => (active === '전체' ? resources : resources.filter((r) => r.category === active)),
@@ -25,7 +25,7 @@ export function Market() {
   return (
     <div className="space-y-6">
       <SectionHeading
-        title="자원마켓"
+        title="우리동네 자원"
         description="지금 우리 동네에서 나눌 수 있는 자원을 둘러보세요"
       />
 

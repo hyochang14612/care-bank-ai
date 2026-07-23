@@ -1,24 +1,43 @@
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
 
-export function PointBank() {
+const usageItems = [
+  { icon: '🏪', label: '협약 지역 서비스' },
+  { icon: '🏢', label: '복지관 프로그램' },
+  { icon: '🤲', label: '지역 나눔 활동' },
+  { icon: '💚', label: '재기부' },
+]
+
+export function CarePointBank() {
   const { pointRecords } = useAppData()
   const totalPoints = pointRecords.reduce((sum, record) => sum + record.points, 0)
 
   return (
     <div className="space-y-6">
-      <SectionHeading title="나눔통장" description="지금까지 쌓아온 참여와 나눔의 기록이에요" />
+      <SectionHeading title="CARE POINT 통장" description="지금까지 쌓아온 참여와 나눔의 기록이에요" />
 
       <section className="rounded-3xl bg-gradient-to-br from-brand to-brand-dark px-6 py-7 text-white sm:px-8">
-        <p className="text-sm text-mint">정사회복지사님의 나눔통장</p>
+        <p className="text-sm text-mint">이웃님의 CARE POINT 통장</p>
         <p className="mt-2 text-3xl font-bold">
           {totalPoints.toLocaleString()}
-          <span className="ml-1 text-base font-medium text-mint">감사 포인트</span>
+          <span className="ml-1 text-base font-medium text-mint">CARE POINT</span>
         </p>
         <p className="mt-2 text-sm text-white/80">
-          현금처럼 사용할 수 없어요. 나눔에 참여한 마음을 기록하고 응원하는 지표예요.
+          현금처럼 사용할 수 없어요. 나눔에 참여한 마음을 기록하고 순환시키는 지표예요.
         </p>
       </section>
+
+      <div>
+        <h2 className="mb-3 text-base font-bold text-ink">이렇게 사용할 수 있어요</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {usageItems.map((item) => (
+            <div key={item.label} className="rounded-2xl bg-surface p-4 text-center shadow-card">
+              <span className="text-xl">{item.icon}</span>
+              <p className="mt-1.5 text-xs font-medium text-ink">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div>
         <h2 className="mb-3 text-base font-bold text-ink">참여 기록</h2>

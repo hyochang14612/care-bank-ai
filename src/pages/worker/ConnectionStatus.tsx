@@ -1,20 +1,20 @@
-import { SectionHeading } from '../components/SectionHeading'
-import { useAppData } from '../context/AppDataContext'
-import type { ConnectionStatus } from '../data/types'
+import { SectionHeading } from '../../components/SectionHeading'
+import { useAppData } from '../../context/AppDataContext'
+import type { ConnectionStatus as ConnectionStatusType } from '../../data/types'
 
-const statusStyle: Record<ConnectionStatus, string> = {
+const statusStyle: Record<ConnectionStatusType, string> = {
   '연계 완료': 'bg-mint text-brand-dark',
   진행중: 'bg-blue-soft text-blue',
   '확인 필요': 'bg-coral-soft text-coral',
   보류: 'bg-bg text-subtle',
 }
 
-export function Connections() {
+export function ConnectionStatus() {
   const { connections } = useAppData()
 
   return (
     <div className="space-y-6">
-      <SectionHeading title="연계관리" description="진행 중인 연계 사례를 한눈에 확인하세요" />
+      <SectionHeading title="연계 현황" description="진행 중인 연계 사례를 한눈에 확인하세요" />
 
       <div className="space-y-3">
         {connections.map((connection) => (
@@ -48,7 +48,9 @@ export function Connections() {
               >
                 {connection.status}
               </span>
-              <p className="text-xs text-subtle">{connection.updatedAt} · {connection.worker}</p>
+              <p className="text-xs text-subtle">
+                {connection.updatedAt} · {connection.worker}
+              </p>
             </div>
           </div>
         ))}

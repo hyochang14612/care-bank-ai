@@ -1,10 +1,10 @@
 import { SectionHeading } from '../components/SectionHeading'
 import { newsItems } from '../data/mock'
 
-export function News() {
+export function Stories() {
   return (
     <div className="space-y-6">
-      <SectionHeading title="나눔뉴스" description="우리 동네 나눔 소식을 전해드려요" />
+      <SectionHeading title="나눔 이야기" description="우리 동네 나눔이 만든 따뜻한 변화를 전해드려요" />
 
       <div className="space-y-3">
         {newsItems.map((item) => (

@@ -1,5 +1,7 @@
 export type ResourceCategory = '위생관리' | '식생활' | '이동지원' | '주거환경' | '정서지원' | '교육문화'
 
+export type ResourceType = '물품 나눔' | '재능 나눔' | '시간 나눔' | '공간 나눔'
+
 export interface SharedResource {
   id: string
   title: string
@@ -9,19 +11,21 @@ export interface SharedResource {
   availability: string
   quantityLeft: number
   quantityTotal: number
-  matchScore: number
   category: ResourceCategory
+  resourceType: ResourceType
   tags: string[]
   urgent: boolean
   icon: string
 }
+
+export type MatchGrade = '매우 적합' | '적합' | '검토 필요'
 
 export interface MatchResult {
   rank: number
   caseId: string
   applicantAlias: string
   resourceTitle: string
-  matchScore: number
+  grade: MatchGrade
   reasons: string[]
   checks: string[]
   status: '확인 대기' | '연계 진행중' | '보류'
@@ -52,7 +56,7 @@ export interface Connection {
 export interface PointRecord {
   id: string
   title: string
-  type: '참여 기록' | '감사 포인트' | '나눔 실천'
+  type: '참여 기록' | 'CARE POINT' | '나눔 실천'
   date: string
   points: number
   memo: string
@@ -69,19 +73,15 @@ export interface NewsItem {
   icon: string
 }
 
-export interface DonorProfile {
-  name: string
-  totalPoints: number
-  recentDonation: string
-  recentRecipient: string
-  thankYouMessage: string
-  thankYouFrom: string
-}
+export type CareRequestStatus = '신규 접수' | '검토중' | '지원 확정'
 
-export interface BeneficiaryProfile {
-  alias: string
-  resourceTitle: string
-  provider: string
-  schedule: string
-  worker: string
+export interface CareRequest {
+  id: string
+  name: string
+  location: string
+  needType: string
+  detail: string
+  contactTime: string
+  status: CareRequestStatus
+  submittedAt: string
 }

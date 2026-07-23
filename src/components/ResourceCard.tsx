@@ -1,6 +1,5 @@
 import type { SharedResource } from '../data/types'
 import { Tag } from './Tag'
-import { ScoreBadge } from './ScoreBadge'
 
 export function ResourceCard({ resource }: { resource: SharedResource }) {
   return (
@@ -28,9 +27,8 @@ export function ResourceCard({ resource }: { resource: SharedResource }) {
         </span>
       </div>
 
-      <ScoreBadge score={resource.matchScore} size="sm" />
-
       <div className="flex flex-wrap gap-1.5">
+        <Tag tone="blue">{resource.resourceType}</Tag>
         {resource.tags.map((tag) => (
           <Tag key={tag} tone={tag === '소진임박' ? 'coral' : 'mint'}>
             {tag}
@@ -39,7 +37,7 @@ export function ResourceCard({ resource }: { resource: SharedResource }) {
       </div>
 
       <button className="mt-1 w-full rounded-xl bg-brand py-2.5 text-sm font-semibold text-white transition hover:bg-brand-dark">
-        추천 대상자 보기
+        자세히 보기
       </button>
     </div>
   )
