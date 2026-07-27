@@ -1,14 +1,21 @@
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useAppData } from '../context/AppDataContext'
 
 const navItems = [
-  { to: '/worker/dashboard', label: 'AI 추천', icon: '✨' },
-  { to: '/worker/cases', label: '대상자 관리', icon: '🗂️' },
-  { to: '/worker/approve', label: '매칭 승인', icon: '✅' },
-  { to: '/worker/connections', label: '연계 현황', icon: '🔗' },
+  { to: '/worker/ai-matching', label: 'AI 매칭', icon: '✨' },
+  { to: '/worker/connections', label: '연계관리', icon: '🔗' },
   { to: '/worker/stats', label: '통계', icon: '📊' },
 ]
 
 export function WorkerShell() {
+  const { logout } = useAppData()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
+
   return (
     <div className="min-h-svh bg-bg">
       <header className="sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur">
@@ -27,20 +34,12 @@ export function WorkerShell() {
                 </p>
               </div>
             </Link>
-            <div className="flex shrink-0 items-center gap-2">
-              <Link
-                to="/resident"
-                className="hidden items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm font-medium text-subtle shadow-card transition hover:bg-bg hover:text-ink sm:flex"
-              >
-                ← 주민 화면으로
-              </Link>
-              <span className="flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-ink shadow-card">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mint text-xs">
-                  🙂
-                </span>
-                <span className="hidden sm:inline">정사회복지사</span>
-              </span>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="shrink-0 whitespace-nowrap rounded-full border border-line px-3 py-2 text-xs font-medium text-subtle transition hover:bg-bg hover:text-ink sm:px-4 sm:text-sm"
+            >
+              정사회복지사 · 로그아웃
+            </button>
           </div>
 
           <nav className="hidden items-center gap-1 sm:flex">

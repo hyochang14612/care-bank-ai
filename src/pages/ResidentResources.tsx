@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ResourceCard } from '../components/ResourceCard'
 import { SectionHeading } from '../components/SectionHeading'
-import { resources } from '../data/mock'
+import { useAppData } from '../context/AppDataContext'
 import type { ResourceCategory } from '../data/types'
 
 const categories: (ResourceCategory | '전체')[] = [
@@ -15,11 +15,12 @@ const categories: (ResourceCategory | '전체')[] = [
 ]
 
 export function ResidentResources() {
+  const { resources } = useAppData()
   const [active, setActive] = useState<ResourceCategory | '전체'>('전체')
 
   const filtered = useMemo(
     () => (active === '전체' ? resources : resources.filter((r) => r.category === active)),
-    [active],
+    [active, resources],
   )
 
   return (

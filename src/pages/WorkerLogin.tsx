@@ -1,12 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useAppData } from '../context/AppDataContext'
 
 export function WorkerLogin() {
   const navigate = useNavigate()
+  const { loginWorker } = useAppData()
+
+  const submit = () => {
+    loginWorker()
+    navigate('/worker/ai-matching')
+  }
 
   return (
     <div className="flex min-h-svh items-center justify-center bg-bg px-5">
       <div className="w-full max-w-sm space-y-5 rounded-3xl bg-surface p-8 text-center shadow-card">
-        <Link to="/" className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-2xl text-white">
+        <Link
+          to="/"
+          className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-2xl text-white"
+        >
           🌿
         </Link>
         <div>
@@ -26,13 +36,13 @@ export function WorkerLogin() {
         </div>
 
         <button
-          onClick={() => navigate('/worker/dashboard')}
+          onClick={submit}
           className="w-full rounded-xl bg-brand py-3 text-sm font-semibold text-white transition hover:bg-brand-dark"
         >
           로그인하기
         </button>
 
-        <Link to="/resident" className="block text-xs text-subtle hover:text-ink">
+        <Link to="/" className="block text-xs text-subtle hover:text-ink">
           주민이신가요? 주민 화면으로 이동
         </Link>
       </div>

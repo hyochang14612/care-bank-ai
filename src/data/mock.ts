@@ -27,8 +27,7 @@ export const resources: SharedResource[] = [
     quantityTotal: 10,
     category: '위생관리',
     resourceType: '재능 나눔',
-    tags: ['위생관리', '동네자원', '소진임박'],
-    urgent: true,
+    tags: ['위생관리', '동네자원'],
     icon: '💇',
   },
   {
@@ -43,7 +42,6 @@ export const resources: SharedResource[] = [
     category: '식생활',
     resourceType: '물품 나눔',
     tags: ['식생활', '정기지원'],
-    urgent: false,
     icon: '🍱',
   },
   {
@@ -57,8 +55,7 @@ export const resources: SharedResource[] = [
     quantityTotal: 8,
     category: '이동지원',
     resourceType: '시간 나눔',
-    tags: ['이동지원', '청년봉사', '소진임박'],
-    urgent: true,
+    tags: ['이동지원', '청년봉사'],
     icon: '🚗',
   },
   {
@@ -73,7 +70,6 @@ export const resources: SharedResource[] = [
     category: '주거환경',
     resourceType: '재능 나눔',
     tags: ['주거환경', '전문기술나눔'],
-    urgent: false,
     icon: '🔧',
   },
   {
@@ -88,7 +84,6 @@ export const resources: SharedResource[] = [
     category: '정서지원',
     resourceType: '시간 나눔',
     tags: ['정서지원', '정기방문'],
-    urgent: false,
     icon: '💬',
   },
   {
@@ -103,7 +98,6 @@ export const resources: SharedResource[] = [
     category: '교육문화',
     resourceType: '물품 나눔',
     tags: ['교육문화', '아동지원'],
-    urgent: false,
     icon: '📚',
   },
   {
@@ -118,7 +112,6 @@ export const resources: SharedResource[] = [
     category: '교육문화',
     resourceType: '공간 나눔',
     tags: ['공간나눔', '지역모임'],
-    urgent: false,
     icon: '🏠',
   },
 ]
@@ -238,6 +231,10 @@ export const newsItems: NewsItem[] = [
     tag: '참여 이야기',
     org: '용산구 통합돌봄센터',
     icon: '🎉',
+    likes: 24,
+    comments: [
+      { id: 'c1', author: '이웃 주민', text: '너무 좋은 소식이에요! 저도 참여하고 싶어요.' },
+    ],
   },
   {
     id: 'n2',
@@ -247,15 +244,19 @@ export const newsItems: NewsItem[] = [
     tag: '자원 이야기',
     org: '행복나눔부엌',
     icon: '🍱',
+    likes: 31,
+    comments: [],
   },
   {
     id: 'n3',
     title: '작은 재능 하나가 이웃의 하루를 바꿨어요',
-    summary: '동네 미용실 사장님의 재능 나눔이 AI 매칭을 통해 필요한 어르신께 빠르게 연결됐습니다.',
+    summary: '동네 미용실 사장님의 작은 재능 나눔이 필요한 어르신께 빠르게 연결됐습니다.',
     date: '2026.07.14',
     tag: '지역 변화',
     org: '우리동네 통합돌봄 뱅크',
     icon: '✨',
+    likes: 18,
+    comments: [{ id: 'c1', author: '동네 주민', text: '읽으면서 마음이 따뜻해졌어요 :)' }],
   },
 ]
 

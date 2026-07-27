@@ -11,20 +11,36 @@ function todayLabel() {
 }
 
 export function CareRequest() {
-  const { addCareRequest } = useAppData()
+  const { role, residentName, addCareRequest } = useAppData()
   const [submitted, setSubmitted] = useState(false)
   const [form, setForm] = useState({
-    name: '이웃 주민',
     location: '효창동',
     needType: '식생활 지원',
     detail: '',
     contactTime: '평일 오전',
   })
 
+  if (role === 'guest') {
+    return (
+      <div className="mx-auto max-w-lg space-y-4 rounded-3xl bg-surface p-8 text-center shadow-card">
+        <span className="text-3xl">🔒</span>
+        <h2 className="text-lg font-bold text-ink">로그인이 필요해요</h2>
+        <p className="text-sm text-subtle">돌봄 신청은 지역주민 로그인 후 이용할 수 있어요.</p>
+        <Link
+          to="/login"
+          state={{ from: '/request' }}
+          className="inline-block rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-dark"
+        >
+          로그인하러 가기
+        </Link>
+      </div>
+    )
+  }
+
   const submit = () => {
     addCareRequest({
       id: `req-${Date.now()}`,
-      name: form.name,
+      name: residentName,
       location: form.location,
       needType: form.needType,
       detail: form.detail || '상세 내용을 입력하지 않았어요.',
@@ -42,10 +58,11 @@ export function CareRequest() {
         <h2 className="text-lg font-bold text-ink">접수가 완료되었습니다.</h2>
         <p className="text-sm text-subtle">사회복지사가 확인 후 안내드립니다.</p>
         <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-brand-dark">
-          누구나 신청할 수 있지만, 최종 지원 여부는 사회복지사가 확인합니다.
+          지원 필요, 돌봄 공백, 지역사회 서비스 연계 여부 등을 사회복지사가 종합적으로 판단해 최종
+          지원 여부를 결정합니다.
         </p>
         <Link
-          to="/resident"
+          to="/"
           className="inline-block rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-dark"
         >
           홈으로
@@ -63,13 +80,6 @@ export function CareRequest() {
 
       <div className="space-y-5 rounded-3xl bg-surface p-6 shadow-card">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="표시명">
-            <input
-              className="input"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-          </Field>
           <Field label="지역">
             <input
               className="input"
@@ -109,7 +119,8 @@ export function CareRequest() {
         </Field>
 
         <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-brand-dark">
-          누구나 신청할 수 있지만, 최종 지원 여부는 사회복지사가 확인합니다.
+          신청은 누구나 가능하지만, 사회복지사 판단 하에 지원 필요·돌봄 공백·지역사회 서비스 연계가
+          필요한 경우에 한해 최종 지원이 확정됩니다.
         </p>
 
         <button

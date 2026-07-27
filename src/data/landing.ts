@@ -26,11 +26,11 @@ export const heroBanners: HeroBanner[] = [
   },
   {
     id: 'b3',
-    eyebrow: '사람과 기술이 함께 만드는 연결',
-    message: 'AI가 찾고,\n사회복지사가 연결하는\n새로운 지역 돌봄',
-    icons: ['🤖', '✨', '🧑‍💼'],
-    ctaLabel: 'AI 매칭 체험하기',
-    ctaTo: '/register',
+    eyebrow: '이웃들의 진짜 이야기',
+    message: '작은 나눔이\n동네를 바꾸는 이야기를\n확인해보세요.',
+    icons: ['📰', '✨', '🧑‍🤝‍🧑'],
+    ctaLabel: '나눔 이야기 보기',
+    ctaTo: '/stories',
   },
   {
     id: 'b4',
@@ -78,8 +78,8 @@ export const solutionPoints = [
   },
   {
     icon: '✨',
-    title: 'AI + 사회복지사 스마트 매칭',
-    body: 'AI가 지역·시간·욕구·자원 유형을 분석하고 사회복지사가 최종 확인해요.',
+    title: '스마트 매칭 시스템',
+    body: '지역·시간·욕구·자원 유형을 분석해 사회복지사가 최종 확인해요.',
   },
   {
     icon: '💚',

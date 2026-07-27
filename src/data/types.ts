@@ -14,7 +14,6 @@ export interface SharedResource {
   category: ResourceCategory
   resourceType: ResourceType
   tags: string[]
-  urgent: boolean
   icon: string
 }
 
@@ -63,6 +62,12 @@ export interface PointRecord {
   icon: string
 }
 
+export interface StoryComment {
+  id: string
+  author: string
+  text: string
+}
+
 export interface NewsItem {
   id: string
   title: string
@@ -71,6 +76,8 @@ export interface NewsItem {
   tag: string
   org: string
   icon: string
+  likes: number
+  comments: StoryComment[]
 }
 
 export type CareRequestStatus = '신규 접수' | '검토중' | '지원 확정'
@@ -84,4 +91,18 @@ export interface CareRequest {
   contactTime: string
   status: CareRequestStatus
   submittedAt: string
+}
+
+export type PendingMatchStatus = 'AI 매칭 대기' | '매칭 완료'
+
+export interface PendingMatch {
+  id: string
+  residentName: string
+  resourceTitle: string
+  category: ResourceCategory
+  location: string
+  availableTime: string
+  status: PendingMatchStatus
+  grade?: MatchGrade
+  reasons?: string[]
 }

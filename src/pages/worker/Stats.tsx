@@ -1,13 +1,13 @@
 import { StatCard } from '../../components/StatCard'
 import { SectionHeading } from '../../components/SectionHeading'
 import { useAppData } from '../../context/AppDataContext'
-import { dailyStats, resources } from '../../data/mock'
+import { dailyStats } from '../../data/mock'
 import type { ResourceType } from '../../data/types'
 
 const resourceTypes: ResourceType[] = ['물품 나눔', '재능 나눔', '시간 나눔', '공간 나눔']
 
 export function Stats() {
-  const { connections } = useAppData()
+  const { connections, resources } = useAppData()
 
   const typeCounts = resourceTypes.map((type) => ({
     type,
