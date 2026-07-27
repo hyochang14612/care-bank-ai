@@ -10,8 +10,8 @@ export interface HeroBanner {
 export const heroBanners: HeroBanner[] = [
   {
     id: 'b1',
-    eyebrow: '당신의 나눔이 우리 동네를 바꿉니다',
-    message: '가진 것을 나누면,\n우리 동네가 달라집니다.',
+    eyebrow: '지역 자원으로 시작하는 우리 동네 돌봄',
+    message: '내가 가진 자원으로\n우리 동네의 돌봄을 시작합니다.',
     icons: ['💰', '🎁', '⏰'],
     ctaLabel: '자원 등록하기',
     ctaTo: '/register',
@@ -35,7 +35,7 @@ export const heroBanners: HeroBanner[] = [
 ]
 
 export const careIntro =
-  '우리동네 통합돌봄 뱅크는 지역 자원과 복지 욕구를 AI와 사회복지사의 협력으로 연결하여, 주민이 제공한 자원이 필요한 이웃에게 전달되고, 지역사회 선순환을 만드는 플랫폼입니다.'
+  '우리동네 통합돌봄 뱅크는 지역주민들의 자원과 복지 욕구, 그리고 사회복지사의 협력으로 연결하여, 주민이 제공한 자원이 필요한 이웃에게 전달되고, 지역사회 선순환을 만드는 플랫폼입니다.'
 
 export const careLetters = [
   { letter: 'C', word: 'Connect', desc: '지역 자원과 사람을 연결' },

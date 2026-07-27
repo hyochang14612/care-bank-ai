@@ -2,26 +2,19 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
-import type { ResourceBenefit, ResourceCategory, ResourceType } from '../data/types'
+import type { ResourceCategory, ResourceType } from '../data/types'
 
-const resourceTypes: { value: ResourceType; icon: string; desc: string; benefit: ResourceBenefit }[] = [
-  { value: '돈', icon: '💰', desc: '후원금, 기부금', benefit: '후원금영수증 발급' },
-  { value: '재능', icon: '🎁', desc: '기술, 재능, 전문성', benefit: 'CARE POINT 적립' },
-  { value: '물품 나눔', icon: '📦', desc: '생활용품, 식료품 등', benefit: 'CARE POINT 적립' },
-  { value: '시간봉사', icon: '⏰', desc: '봉사, 동행, 방문', benefit: '봉사시간 산정' },
-  { value: '공간 제공', icon: '🏠', desc: '모임 공간, 대관', benefit: 'CARE POINT 적립' },
+const resourceTypes: { value: ResourceType; icon: string; desc: string }[] = [
+  { value: '돈', icon: '💰', desc: '후원금, 기부금' },
+  { value: '재능', icon: '🎁', desc: '기술, 재능, 전문성' },
+  { value: '물품 나눔', icon: '📦', desc: '생활용품, 식료품 등' },
+  { value: '시간봉사', icon: '⏰', desc: '봉사, 동행, 방문' },
+  { value: '공간 제공', icon: '🏠', desc: '모임 공간, 대관' },
 ]
-
-const benefitTone: Record<ResourceBenefit, string> = {
-  '후원금영수증 발급': 'bg-blue-soft text-blue',
-  'CARE POINT 적립': 'bg-mint text-brand-dark',
-  '봉사시간 산정': 'bg-coral-soft text-coral',
-}
 
 const categories: ResourceCategory[] = ['위생관리', '식생활', '이동지원', '주거환경', '정서지원', '교육문화']
 
-const noticeText =
-  '등록한 자원은 사회복지사가 확인 후 연계되며, 자원 유형에 따라 후원영수증, CARE POINT, 봉사시간 등으로 산정됩니다.'
+const noticeText = '자원 유형에 따라 CARE POINT와 후원영수증이 발급될 수 있습니다.'
 
 export function Register() {
   const { role, residentName, addResource, addPendingMatch } = useAppData()
@@ -87,14 +80,10 @@ export function Register() {
       <div className="mx-auto max-w-lg space-y-5 rounded-3xl bg-surface p-8 text-center shadow-card">
         <span className="text-3xl">🎉</span>
         <h2 className="text-lg font-bold text-ink">등록이 완료되었습니다.</h2>
-        <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-brand-dark">{noticeText}</p>
         <p className="text-sm text-subtle">
-          이번 등록({selectedType.value})은{' '}
-          <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${benefitTone[selectedType.benefit]}`}>
-            {selectedType.benefit}
-          </span>
-          {' '}으로 산정될 예정이에요.
+          이웃님의 {selectedType.value} 나눔이 곧 필요한 이웃에게 전달될 거예요.
         </p>
+        <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-brand-dark">{noticeText}</p>
         <div className="flex flex-wrap justify-center gap-2">
           <Link
             to="/resources"
@@ -137,14 +126,19 @@ export function Register() {
                 <span className="text-xl">{type.icon}</span>
                 <p className="mt-1.5 text-sm font-semibold text-ink">{type.value}</p>
                 <p className="text-[11px] text-subtle">{type.desc}</p>
-                <span
-                  className={`mt-1.5 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${benefitTone[type.benefit]}`}
-                >
-                  {type.benefit}
-                </span>
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="space-y-1.5 rounded-2xl bg-blue-soft p-4 text-sm text-ink">
+          <p>
+            💚 <strong className="font-semibold">CARE POINT</strong> — 모든 자원 유형에 발급돼요
+          </p>
+          <p>
+            🧾 <strong className="font-semibold">후원금 영수증</strong> — 재능기부·물품 등 법적 기준에
+            따라 발급될 수 있어요
+          </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
