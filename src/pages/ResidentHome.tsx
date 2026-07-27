@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom'
 import { ResourceCard } from '../components/ResourceCard'
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
-import { heroBanners, careLetters, problemPoints, problemNote, solutionPoints } from '../data/landing'
+import {
+  heroBanners,
+  careIntro,
+  careLetters,
+  problemPoints,
+  problemNote,
+  solutionPoints,
+} from '../data/landing'
 import { newsItems } from '../data/mock'
 
 export function ResidentHome() {
@@ -64,6 +71,19 @@ export function ResidentHome() {
         </div>
       </section>
 
+      <div className="flex flex-col items-center gap-3 rounded-3xl border-2 border-coral bg-coral-soft px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <p className="text-lg font-bold text-ink">🌱 지금 등록하면 바로 이웃과 연결될 수 있어요!</p>
+          <p className="mt-1 text-sm text-ink/70">1분이면 충분해요. 돈·재능·물품·시간·공간, 무엇이든 좋아요.</p>
+        </div>
+        <Link
+          to="/register"
+          className="shrink-0 rounded-full bg-coral px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:brightness-95"
+        >
+          1분만에 등록하기 →
+        </Link>
+      </div>
+
       <p className="flex items-center gap-2 rounded-2xl border border-mint bg-mint/60 px-4 py-3 text-sm text-brand-dark">
         <span className="text-base">🤝</span>
         등록된 자원은 사회복지사가 최종 확인 후 연계하여 안내드립니다.
@@ -85,6 +105,9 @@ export function ResidentHome() {
       <section>
         <p className="text-xs font-semibold text-brand-dark">OUR VALUE</p>
         <h2 className="mt-1 text-xl font-bold text-ink">CARE BANK가 지키는 약속</h2>
+        <p className="mt-3 max-w-3xl rounded-2xl bg-surface p-5 text-sm leading-relaxed text-ink shadow-card">
+          {careIntro}
+        </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-4">
           {careLetters.map((c) => (
             <div key={c.letter} className="rounded-2xl bg-surface p-5 text-center shadow-card">

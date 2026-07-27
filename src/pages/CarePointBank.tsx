@@ -2,9 +2,9 @@ import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
 
 const usageItems = [
-  { icon: '🏪', label: '협약 지역 서비스' },
-  { icon: '🏢', label: '복지관 프로그램' },
-  { icon: '🤲', label: '지역 나눔 활동' },
+  { icon: '🏪', label: '협약된 지역 서비스 이용' },
+  { icon: '🏢', label: '복지관 프로그램 참여' },
+  { icon: '🛍️', label: '나눔 마켓 교환' },
   { icon: '💚', label: '재기부' },
 ]
 
@@ -26,6 +26,12 @@ export function CarePointBank() {
           현금처럼 사용할 수 없어요. 나눔에 참여한 마음을 기록하고 순환시키는 지표예요.
         </p>
       </section>
+
+      <p className="rounded-2xl bg-surface p-5 text-sm leading-relaxed text-ink shadow-card">
+        <strong className="font-semibold text-brand-dark">CARE POINT란</strong> 내가 등록한 자원이
+        연계되고 결과가 나오면 받을 수 있는 포인트예요. 포인트를 적립하고 다시 사용하면서 우리 동네
+        나눔의 선순환을 직접 체험해보세요.
+      </p>
 
       <div>
         <h2 className="mb-3 text-base font-bold text-ink">이렇게 사용할 수 있어요</h2>

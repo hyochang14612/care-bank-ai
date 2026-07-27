@@ -10,22 +10,14 @@ export interface HeroBanner {
 export const heroBanners: HeroBanner[] = [
   {
     id: 'b1',
-    eyebrow: '지역 주민이 함께 만드는 변화',
-    message: '우리 동네의 작은 자원이\n필요한 이웃에게 연결됩니다.',
-    icons: ['🤝', '🌳', '👨‍👩‍👧‍👦'],
-    ctaLabel: '나눔 시작하기',
-    ctaTo: '/register',
-  },
-  {
-    id: 'b2',
-    eyebrow: '재능이 곧 돌봄이 되는 동네',
-    message: '당신의 경험과 재능이\n우리 동네 돌봄이 됩니다.',
-    icons: ['💇', '🍱', '🔧'],
+    eyebrow: '당신의 나눔이 우리 동네를 바꿉니다',
+    message: '가진 것을 나누면,\n우리 동네가 달라집니다.',
+    icons: ['💰', '🎁', '⏰'],
     ctaLabel: '자원 등록하기',
     ctaTo: '/register',
   },
   {
-    id: 'b3',
+    id: 'b2',
     eyebrow: '이웃들의 진짜 이야기',
     message: '작은 나눔이\n동네를 바꾸는 이야기를\n확인해보세요.',
     icons: ['📰', '✨', '🧑‍🤝‍🧑'],
@@ -33,7 +25,7 @@ export const heroBanners: HeroBanner[] = [
     ctaTo: '/stories',
   },
   {
-    id: 'b4',
+    id: 'b3',
     eyebrow: '언제든 기댈 수 있는 동네 연결망',
     message: '도움이 필요할 때\n우리 동네 연결망을 이용하세요.',
     icons: ['💬', '🧑‍💼', '🏠'],
@@ -41,6 +33,9 @@ export const heroBanners: HeroBanner[] = [
     ctaTo: '/request',
   },
 ]
+
+export const careIntro =
+  '우리동네 통합돌봄 뱅크는 지역 자원과 복지 욕구를 AI와 사회복지사의 협력으로 연결하여, 주민이 제공한 자원이 필요한 이웃에게 전달되고, 지역사회 선순환을 만드는 플랫폼입니다.'
 
 export const careLetters = [
   { letter: 'C', word: 'Connect', desc: '지역 자원과 사람을 연결' },

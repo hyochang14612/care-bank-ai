@@ -4,7 +4,7 @@ import { useAppData } from '../../context/AppDataContext'
 import { dailyStats } from '../../data/mock'
 import type { ResourceType } from '../../data/types'
 
-const resourceTypes: ResourceType[] = ['물품 나눔', '재능 나눔', '시간 나눔', '공간 나눔']
+const resourceTypes: ResourceType[] = ['돈', '재능', '물품 나눔', '시간봉사', '공간 제공']
 
 export function Stats() {
   const { connections, resources } = useAppData()

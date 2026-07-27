@@ -1,6 +1,8 @@
 export type ResourceCategory = '위생관리' | '식생활' | '이동지원' | '주거환경' | '정서지원' | '교육문화'
 
-export type ResourceType = '물품 나눔' | '재능 나눔' | '시간 나눔' | '공간 나눔'
+export type ResourceType = '돈' | '재능' | '물품 나눔' | '시간봉사' | '공간 제공'
+
+export type ResourceBenefit = '후원금영수증 발급' | 'CARE POINT 적립' | '봉사시간 산정'
 
 export interface SharedResource {
   id: string
