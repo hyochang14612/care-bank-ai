@@ -6,6 +6,7 @@ import { useAppData } from '../context/AppDataContext'
 import {
   heroBanners,
   careIntro,
+  careCycle,
   careLetters,
   problemPoints,
   problemNote,
@@ -71,24 +72,6 @@ export function ResidentHome() {
         </div>
       </section>
 
-      <div className="flex flex-col items-center gap-3 rounded-3xl border-2 border-coral bg-coral-soft px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left">
-        <div>
-          <p className="text-lg font-bold text-ink">🌱 지금 등록하면 바로 이웃과 연결될 수 있어요!</p>
-          <p className="mt-1 text-sm text-ink/70">1분이면 충분해요. 돈·재능·물품·시간·공간, 무엇이든 좋아요.</p>
-        </div>
-        <Link
-          to="/register"
-          className="shrink-0 rounded-full bg-coral px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:brightness-95"
-        >
-          1분만에 등록하기 →
-        </Link>
-      </div>
-
-      <p className="flex items-center gap-2 rounded-2xl border border-mint bg-mint/60 px-4 py-3 text-sm text-brand-dark">
-        <span className="text-base">🤝</span>
-        등록된 자원은 사회복지사가 최종 확인 후 연계하여 안내드립니다.
-      </p>
-
       <section>
         <SectionHeading
           title="우리동네 자원"
@@ -103,50 +86,58 @@ export function ResidentHome() {
       </section>
 
       <section>
-        <p className="text-xs font-semibold text-brand-dark">OUR VALUE</p>
-        <h2 className="mt-1 text-xl font-bold text-ink">CARE BANK가 지키는 약속</h2>
+        <p className="text-xs font-semibold text-brand-dark">ABOUT</p>
+        <h2 className="mt-1 text-2xl font-bold text-ink">우리동네 통합돌봄 뱅크란?</h2>
         <p className="mt-3 max-w-3xl rounded-2xl bg-surface p-5 text-sm leading-relaxed text-ink shadow-card">
           {careIntro}
         </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-4">
-          {careLetters.map((c) => (
-            <div key={c.letter} className="rounded-2xl bg-surface p-5 text-center shadow-card">
-              <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-mint text-lg font-bold text-brand-dark">
-                {c.letter}
-              </span>
-              <p className="mt-3 text-sm font-semibold text-ink">{c.word}</p>
-              <p className="mt-1 text-xs text-subtle">{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <p className="mt-3 max-w-3xl rounded-2xl bg-mint/60 p-5 text-sm leading-relaxed text-brand-dark">
+          {careCycle}
+        </p>
 
-      <section>
-        <p className="text-xs font-semibold text-coral">PROBLEM</p>
-        <h2 className="mt-1 text-xl font-bold text-ink">지역 돌봄 현장의 문제</h2>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          {problemPoints.map((p) => (
-            <div key={p.title} className="rounded-2xl bg-surface p-5 shadow-card">
-              <span className="text-xl">{p.icon}</span>
-              <h3 className="mt-2 text-sm font-semibold text-ink">{p.title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-subtle">{p.body}</p>
-            </div>
-          ))}
+        <div className="mt-8">
+          <p className="text-xs font-semibold text-brand-dark">OUR VALUE</p>
+          <h3 className="mt-1 text-lg font-bold text-ink">CARE BANK가 지키는 약속</h3>
+          <div className="mt-4 grid gap-3 sm:grid-cols-4">
+            {careLetters.map((c) => (
+              <div key={c.letter} className="rounded-2xl bg-surface p-5 text-center shadow-card">
+                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-mint text-lg font-bold text-brand-dark">
+                  {c.letter}
+                </span>
+                <p className="mt-3 text-sm font-semibold text-ink">{c.word}</p>
+                <p className="mt-1 text-xs text-subtle">{c.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <p className="mt-4 rounded-2xl bg-coral-soft px-4 py-3 text-sm text-coral">{problemNote}</p>
-      </section>
 
-      <section>
-        <p className="text-xs font-semibold text-brand-dark">SOLVE</p>
-        <h2 className="mt-1 text-xl font-bold text-ink">사회복지사와 함께 만드는 새로운 연결</h2>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          {solutionPoints.map((s) => (
-            <div key={s.title} className="rounded-2xl bg-mint p-5">
-              <span className="text-xl">{s.icon}</span>
-              <h3 className="mt-2 text-sm font-semibold text-brand-dark">{s.title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-ink/80">{s.body}</p>
-            </div>
-          ))}
+        <div className="mt-8">
+          <p className="text-xs font-semibold text-coral">PROBLEM</p>
+          <h3 className="mt-1 text-lg font-bold text-ink">지역 돌봄 현장의 문제</h3>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {problemPoints.map((p) => (
+              <div key={p.title} className="rounded-2xl bg-surface p-5 shadow-card">
+                <span className="text-xl">{p.icon}</span>
+                <h4 className="mt-2 text-sm font-semibold text-ink">{p.title}</h4>
+                <p className="mt-1 text-xs leading-relaxed text-subtle">{p.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 rounded-2xl bg-coral-soft px-4 py-3 text-sm text-coral">{problemNote}</p>
+        </div>
+
+        <div className="mt-8">
+          <p className="text-xs font-semibold text-brand-dark">SOLVE</p>
+          <h3 className="mt-1 text-lg font-bold text-ink">사회복지사와 함께 만드는 새로운 연결</h3>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {solutionPoints.map((s) => (
+              <div key={s.title} className="rounded-2xl bg-mint p-5">
+                <span className="text-xl">{s.icon}</span>
+                <h4 className="mt-2 text-sm font-semibold text-brand-dark">{s.title}</h4>
+                <p className="mt-1 text-xs leading-relaxed text-ink/80">{s.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
