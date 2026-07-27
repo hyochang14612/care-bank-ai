@@ -95,6 +95,22 @@ export function ResidentHome() {
           {careCycle}
         </p>
 
+        <div className="mt-8 max-w-3xl rounded-2xl bg-gradient-to-br from-brand to-brand-dark p-6 text-white">
+          <p className="text-xs font-semibold text-mint">CARE POINT</p>
+          <h3 className="mt-1 text-lg font-bold">나눔이 다시 나에게 돌아와요</h3>
+          <p className="mt-2 text-sm leading-relaxed text-white/85">
+            내가 등록한 자원이 연계되고 결과가 나오면 CARE POINT를 받을 수 있어요. 협약 지역 서비스
+            이용, 복지관 프로그램 참여, 나눔 마켓 교환, 재기부까지 — 포인트로 다시 나눔을 이어갈 수
+            있어요.
+          </p>
+          <Link
+            to="/care-point"
+            className="mt-4 inline-block rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-brand-dark transition hover:bg-mint"
+          >
+            CARE POINT 통장 보기 →
+          </Link>
+        </div>
+
         <div className="mt-8">
           <p className="text-xs font-semibold text-brand-dark">OUR VALUE</p>
           <h3 className="mt-1 text-lg font-bold text-ink">CARE BANK가 지키는 약속</h3>

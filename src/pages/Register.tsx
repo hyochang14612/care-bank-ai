@@ -14,7 +14,8 @@ const resourceTypes: { value: ResourceType; icon: string; desc: string }[] = [
 
 const categories: ResourceCategory[] = ['위생관리', '식생활', '이동지원', '주거환경', '정서지원', '교육문화']
 
-const noticeText = '자원 유형에 따라 CARE POINT와 후원영수증이 발급될 수 있습니다.'
+const noticeText =
+  '등록한 자원은 사회복지사가 확인 후 연계되며, 자원 유형에 따라 CARE POINT와 후원영수증이 발급됩니다.'
 
 export function Register() {
   const { role, residentName, addResource, addPendingMatch } = useAppData()
@@ -133,11 +134,15 @@ export function Register() {
 
         <div className="space-y-1.5 rounded-2xl bg-blue-soft p-4 text-sm text-ink">
           <p>
-            💚 <strong className="font-semibold">CARE POINT</strong> — 모든 자원 유형에 발급돼요
+            💚 <strong className="font-semibold">CARE POINT 적립</strong> — 모든 자원 유형에 적립돼요
           </p>
           <p>
-            🧾 <strong className="font-semibold">후원금 영수증</strong> — 재능기부·물품 등 법적 기준에
+            🧾 <strong className="font-semibold">후원영수증 발급</strong> — 재능기부·물품 등 법적 기준에
             따라 발급될 수 있어요
+          </p>
+          <p>
+            ⏱ <strong className="font-semibold">봉사시간 산정</strong> — 시간봉사로 등록하면 봉사시간으로
+            산정돼요
           </p>
         </div>
 
