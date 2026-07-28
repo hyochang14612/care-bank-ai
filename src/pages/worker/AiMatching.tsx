@@ -15,7 +15,7 @@ const demoCase = {
 
 function computeMatch(pm: PendingMatch) {
   const criteria = [
-    { label: '욕구 유형 일치', matched: pm.category === '식생활' },
+    { label: '욕구 유형 일치', matched: pm.category === '식품' },
     { label: '거리 가까움', matched: pm.location.includes('효창') },
     { label: '가능 시간 일치', matched: /주말|오전/.test(pm.availableTime) },
     { label: '자원 유형 적합', matched: true },
@@ -73,7 +73,10 @@ export function AiMatching() {
 
   return (
     <div className="space-y-8">
-      <SectionHeading title="AI 매칭" description="주민이 등록한 자원을 분석해 적합한 대상자를 추천해요" />
+      <SectionHeading
+        title="AI 기반 자원 분석 및 연결 지원"
+        description="등록된 자원과 돌봄 요청 데이터를 분석하여 사회복지사의 효율적인 연결과 우선 확인을 지원합니다."
+      />
 
       <NoticeBadge />
 

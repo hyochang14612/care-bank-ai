@@ -1,75 +1,59 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ResourceCard } from '../components/ResourceCard'
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
-import {
-  heroBanners,
-  careIntro,
-  careCycle,
-  careLetters,
-  problemPoints,
-  problemNote,
-  solutionPoints,
-} from '../data/landing'
-import { newsItems } from '../data/mock'
+import { heroContent, heroResourceIcons, homeValueSteps } from '../data/landing'
 
 export function ResidentHome() {
   const { resources } = useAppData()
-  const [active, setActive] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % heroBanners.length), 5000)
-    return () => clearInterval(id)
-  }, [])
-
-  const banner = heroBanners[active]
 
   return (
-    <div className="space-y-16">
-      <section>
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand to-brand-dark px-6 py-12 text-white sm:px-14 sm:py-16">
-          <p className="text-sm font-medium text-mint">{banner.eyebrow}</p>
-          <h1 className="mt-3 max-w-xl whitespace-pre-line text-3xl font-bold leading-snug sm:text-4xl">
-            {banner.message}
-          </h1>
-          <div className="mt-6 flex gap-3 text-2xl">
-            {banner.icons.map((icon) => (
-              <span
-                key={icon}
-                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15"
-              >
-                {icon}
+    <div className="space-y-14">
+      <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand to-brand-dark px-6 py-14 text-center text-white sm:px-14 sm:py-20">
+        <h1 className="mx-auto max-w-2xl whitespace-pre-line text-4xl font-extrabold leading-snug sm:text-5xl">
+          {heroContent.message}
+        </h1>
+        <p className="mx-auto mt-5 max-w-xl whitespace-pre-line text-base leading-relaxed text-white/90 sm:text-lg">
+          {heroContent.subtitle}
+        </p>
+
+        <div className="mx-auto mt-8 flex max-w-md justify-center gap-3 text-2xl">
+          {heroResourceIcons.map((r) => (
+            <div key={r.label} className="flex flex-col items-center gap-1.5">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15">
+                {r.icon}
               </span>
-            ))}
-          </div>
-
-          <div className="relative mt-8 inline-flex items-center">
-            <Link
-              to={banner.ctaTo}
-              className="relative inline-block rounded-full bg-white px-7 py-3.5 text-base font-bold text-brand-dark shadow-lg transition hover:bg-mint"
-            >
-              {banner.ctaLabel}
-            </Link>
-            <span className="absolute -right-2 -top-2 flex h-5 w-5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-75" />
-              <span className="relative inline-flex h-5 w-5 rounded-full bg-coral" />
-            </span>
-          </div>
-        </div>
-
-        <div className="mt-4 flex justify-center gap-2">
-          {heroBanners.map((b, i) => (
-            <button
-              key={b.id}
-              onClick={() => setActive(i)}
-              aria-label={`배너 ${i + 1}`}
-              className={`h-2 rounded-full transition-all ${
-                i === active ? 'w-8 bg-brand' : 'w-2 bg-line'
-              }`}
-            />
+              <span className="text-[11px] font-medium text-white/80">{r.label}</span>
+            </div>
           ))}
         </div>
+
+        <div className="relative mt-10 inline-flex items-center">
+          <Link
+            to={heroContent.ctaTo}
+            className="relative inline-block rounded-full bg-white px-10 py-4 text-lg font-bold text-brand-dark shadow-lg transition hover:bg-mint"
+          >
+            {heroContent.ctaLabel}
+          </Link>
+          <span className="absolute -right-2 -top-2 flex h-5 w-5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-75" />
+            <span className="relative inline-flex h-5 w-5 rounded-full bg-coral" />
+          </span>
+        </div>
+      </section>
+
+      <section className="flex flex-wrap items-center justify-center gap-2 rounded-2xl bg-surface p-5 shadow-card sm:gap-4">
+        {homeValueSteps.map((step, i) => (
+          <div key={step.label} className="flex items-center gap-2 sm:gap-4">
+            <div className="flex flex-col items-center gap-1">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-mint text-lg">
+                {step.icon}
+              </span>
+              <span className="text-xs font-medium text-ink">{step.label}</span>
+            </div>
+            {i !== homeValueSteps.length - 1 && <span className="text-line">→</span>}
+          </div>
+        ))}
       </section>
 
       <section>
@@ -78,143 +62,32 @@ export function ResidentHome() {
           description="지금 이웃들이 나누고 있는 동네 자원이에요"
           action={{ label: '전체보기', to: '/resources' }}
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {resources.slice(0, 6).map((resource) => (
+        <div className="grid gap-4 sm:grid-cols-3">
+          {resources.slice(0, 3).map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
           ))}
         </div>
       </section>
 
-      <section>
-        <p className="text-xs font-semibold text-brand-dark">ABOUT</p>
-        <h2 className="mt-1 text-2xl font-bold text-ink">우리동네 통합돌봄 뱅크란?</h2>
-        <p className="mt-3 max-w-3xl rounded-2xl bg-surface p-5 text-sm leading-relaxed text-ink shadow-card">
-          {careIntro}
-        </p>
-        <p className="mt-3 max-w-3xl rounded-2xl bg-mint/60 p-5 text-sm leading-relaxed text-brand-dark">
-          {careCycle}
-        </p>
-
-        <div className="mt-8 max-w-3xl rounded-2xl bg-gradient-to-br from-brand to-brand-dark p-6 text-white">
-          <p className="text-xs font-semibold text-mint">CARE POINT</p>
-          <h3 className="mt-1 text-lg font-bold">나눔이 다시 나에게 돌아와요</h3>
-          <p className="mt-2 text-sm leading-relaxed text-white/85">
-            내가 등록한 자원이 연계되고 결과가 나오면 CARE POINT를 받을 수 있어요. 협약 지역 서비스
-            이용, 복지관 프로그램 참여, 나눔 마켓 교환, 재기부까지 — 포인트로 다시 나눔을 이어갈 수
-            있어요.
-          </p>
-          <Link
-            to="/care-point"
-            className="mt-4 inline-block rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-brand-dark transition hover:bg-mint"
-          >
-            CARE POINT 통장 보기 →
-          </Link>
+      <section className="flex flex-col items-center gap-3 rounded-3xl border border-line bg-surface px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <p className="font-semibold text-ink">도움이 필요하신가요?</p>
+          <p className="mt-1 text-sm text-subtle">주민이라면 누구나 돌봄을 신청할 수 있어요.</p>
         </div>
-
-        <div className="mt-8">
-          <p className="text-xs font-semibold text-brand-dark">OUR VALUE</p>
-          <h3 className="mt-1 text-lg font-bold text-ink">CARE BANK가 지키는 약속</h3>
-          <div className="mt-4 grid gap-3 sm:grid-cols-4">
-            {careLetters.map((c) => (
-              <div key={c.letter} className="rounded-2xl bg-surface p-5 text-center shadow-card">
-                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-mint text-lg font-bold text-brand-dark">
-                  {c.letter}
-                </span>
-                <p className="mt-3 text-sm font-semibold text-ink">{c.word}</p>
-                <p className="mt-1 text-xs text-subtle">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <p className="text-xs font-semibold text-coral">PROBLEM</p>
-          <h3 className="mt-1 text-lg font-bold text-ink">지역 돌봄 현장의 문제</h3>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {problemPoints.map((p) => (
-              <div key={p.title} className="rounded-2xl bg-surface p-5 shadow-card">
-                <span className="text-xl">{p.icon}</span>
-                <h4 className="mt-2 text-sm font-semibold text-ink">{p.title}</h4>
-                <p className="mt-1 text-xs leading-relaxed text-subtle">{p.body}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 rounded-2xl bg-coral-soft px-4 py-3 text-sm text-coral">{problemNote}</p>
-        </div>
-
-        <div className="mt-8">
-          <p className="text-xs font-semibold text-brand-dark">SOLVE</p>
-          <h3 className="mt-1 text-lg font-bold text-ink">사회복지사와 함께 만드는 새로운 연결</h3>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {solutionPoints.map((s) => (
-              <div key={s.title} className="rounded-2xl bg-mint p-5">
-                <span className="text-xl">{s.icon}</span>
-                <h4 className="mt-2 text-sm font-semibold text-brand-dark">{s.title}</h4>
-                <p className="mt-1 text-xs leading-relaxed text-ink/80">{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Link
+          to="/request"
+          className="shrink-0 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-dark"
+        >
+          돌봄 신청하기 →
+        </Link>
       </section>
 
-      <section>
-        <p className="text-xs font-semibold text-blue">LOCAL INFO</p>
-        <h2 className="mt-1 text-xl font-bold text-ink">우리지역 복지정보</h2>
-        <p className="mt-1 text-sm text-subtle">
-          공공데이터와 연계해 지역 복지 정보를 더 폭넓게 안내할 예정이에요 (준비 중)
-        </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          <InfoCard icon="🏛️" title="용산구 복지관" body="지역 복지관 프로그램 안내" />
-          <InfoCard icon="🚑" title="긴급돌봄 지원" body="위기가구 긴급 지원 제도" />
-          <InfoCard icon="📋" title="복지 신청 절차" body="기초생활수급 등 신청 안내" />
-        </div>
-      </section>
-
-      <section>
-        <SectionHeading
-          title="나눔 이야기"
-          description="우리 동네 나눔이 만든 변화예요"
-          action={{ label: '더보기', to: '/stories' }}
-        />
-        <div className="grid gap-3 sm:grid-cols-3">
-          {newsItems.map((item) => (
-            <div key={item.id} className="rounded-2xl bg-surface p-5 shadow-card">
-              <span className="text-xl">{item.icon}</span>
-              <h3 className="mt-2 text-sm font-semibold text-ink">{item.title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-subtle">{item.summary}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="rounded-[2rem] bg-surface p-10 text-center shadow-card">
-        <h2 className="text-xl font-bold text-ink">우리 동네 주민이 함께 만드는 돌봄 플랫폼</h2>
-        <p className="mt-2 text-sm text-subtle">지금 바로 나눔을 시작해보세요</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link
-            to="/register"
-            className="rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-dark"
-          >
-            자원 등록하기
-          </Link>
-          <Link
-            to="/request"
-            className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-ink transition hover:bg-bg"
-          >
-            돌봄 신청하기
-          </Link>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function InfoCard({ icon, title, body }: { icon: string; title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border border-dashed border-line bg-surface p-5">
-      <span className="text-xl">{icon}</span>
-      <h3 className="mt-2 text-sm font-semibold text-ink">{title}</h3>
-      <p className="mt-1 text-xs text-subtle">{body}</p>
+      <Link
+        to="/about"
+        className="block rounded-2xl border border-dashed border-line bg-surface px-5 py-4 text-center text-sm font-medium text-subtle transition hover:bg-bg hover:text-ink"
+      >
+        우리동네 통합돌봄 뱅크는 어떻게 운영되나요? 더 알아보기 →
+      </Link>
     </div>
   )
 }

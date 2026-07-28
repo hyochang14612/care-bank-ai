@@ -1,6 +1,4 @@
-export type ResourceCategory = '위생관리' | '식생활' | '이동지원' | '주거환경' | '정서지원' | '교육문화'
-
-export type ResourceType = '돈' | '재능' | '물품 나눔' | '시간봉사' | '공간 제공'
+export type ResourceType = '물품 나눔' | '재능 나눔' | '시간 나눔' | '공간 나눔'
 
 export interface SharedResource {
   id: string
@@ -11,7 +9,7 @@ export interface SharedResource {
   availability: string
   quantityLeft: number
   quantityTotal: number
-  category: ResourceCategory
+  category: string
   resourceType: ResourceType
   tags: string[]
   icon: string
@@ -81,14 +79,18 @@ export interface NewsItem {
 }
 
 export type CareRequestStatus = '신규 접수' | '검토중' | '지원 확정'
+export type ApplicantType = '본인' | '가족' | '이웃' | '기타'
+export type UrgencyLevel = '일반' | '도움이 필요함' | '긴급'
 
 export interface CareRequest {
   id: string
   name: string
+  applicantType: ApplicantType
   location: string
   needType: string
   detail: string
   contactTime: string
+  urgency: UrgencyLevel
   status: CareRequestStatus
   submittedAt: string
 }
@@ -99,7 +101,7 @@ export interface PendingMatch {
   id: string
   residentName: string
   resourceTitle: string
-  category: ResourceCategory
+  category: string
   location: string
   availableTime: string
   status: PendingMatchStatus

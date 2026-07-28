@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
+import type { ApplicantType, UrgencyLevel } from '../data/types'
 
-const needTypes = ['식생활 지원', '위생관리 지원', '이동 지원', '주거환경 지원', '정서 지원', '교육·문화 지원']
+const applicantTypes: ApplicantType[] = ['본인', '가족', '이웃', '기타']
+const needTypes = ['생활지원', '이동지원', '식생활', '정서지원', '주거지원', '기타']
+const urgencyLevels: UrgencyLevel[] = ['일반', '도움이 필요함', '긴급']
 
 function todayLabel() {
   const now = new Date()
@@ -14,10 +17,14 @@ export function CareRequest() {
   const { role, residentName, addCareRequest } = useAppData()
   const [submitted, setSubmitted] = useState(false)
   const [form, setForm] = useState({
+    applicantType: '본인' as ApplicantType,
+    customApplicantType: '',
     location: '효창동',
-    needType: '식생활 지원',
+    needType: '식생활',
+    customNeedType: '',
     detail: '',
     contactTime: '평일 오전',
+    urgency: '일반' as UrgencyLevel,
   })
 
   if (role === 'guest') {
@@ -37,14 +44,18 @@ export function CareRequest() {
     )
   }
 
+  const finalNeedType = form.needType === '기타' ? form.customNeedType.trim() || '기타' : form.needType
+
   const submit = () => {
     addCareRequest({
       id: `req-${Date.now()}`,
       name: residentName,
+      applicantType: form.applicantType,
       location: form.location,
-      needType: form.needType,
+      needType: finalNeedType,
       detail: form.detail || '상세 내용을 입력하지 않았어요.',
       contactTime: form.contactTime,
+      urgency: form.urgency,
       status: '신규 접수',
       submittedAt: todayLabel(),
     })
@@ -79,6 +90,33 @@ export function CareRequest() {
       />
 
       <div className="space-y-5 rounded-3xl bg-surface p-6 shadow-card">
+        <div>
+          <p className="mb-2 text-xs font-medium text-subtle">신청 대상</p>
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+            {applicantTypes.map((type) => (
+              <button
+                key={type}
+                onClick={() => setForm({ ...form, applicantType: type })}
+                className={`rounded-2xl border p-3 text-center text-sm font-medium transition ${
+                  form.applicantType === type
+                    ? 'border-brand bg-mint text-brand-dark'
+                    : 'border-line bg-surface text-ink hover:bg-bg'
+                }`}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+          {form.applicantType === '기타' && (
+            <input
+              className="input mt-2.5"
+              placeholder="신청 대상을 직접 입력해주세요"
+              value={form.customApplicantType}
+              onChange={(e) => setForm({ ...form, customApplicantType: e.target.value })}
+            />
+          )}
+        </div>
+
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="지역">
             <input
@@ -100,6 +138,16 @@ export function CareRequest() {
               ))}
             </select>
           </Field>
+          {form.needType === '기타' && (
+            <Field label="도움 유형 직접 입력">
+              <input
+                className="input"
+                placeholder="예: 반려동물 돌봄 지원"
+                value={form.customNeedType}
+                onChange={(e) => setForm({ ...form, customNeedType: e.target.value })}
+              />
+            </Field>
+          )}
           <Field label="연락 가능 시간">
             <input
               className="input"
@@ -109,7 +157,7 @@ export function CareRequest() {
           </Field>
         </div>
 
-        <Field label="상세 내용">
+        <Field label="현재 상황">
           <textarea
             className="input min-h-24 resize-none"
             placeholder="어떤 도움이 필요하신지 편하게 적어주세요"
@@ -117,6 +165,27 @@ export function CareRequest() {
             onChange={(e) => setForm({ ...form, detail: e.target.value })}
           />
         </Field>
+
+        <div>
+          <p className="mb-2 text-xs font-medium text-subtle">긴급도</p>
+          <div className="grid grid-cols-3 gap-2.5">
+            {urgencyLevels.map((level) => (
+              <button
+                key={level}
+                onClick={() => setForm({ ...form, urgency: level })}
+                className={`rounded-2xl border p-3 text-center text-sm font-medium transition ${
+                  form.urgency === level
+                    ? level === '긴급'
+                      ? 'border-coral bg-coral-soft text-coral'
+                      : 'border-brand bg-mint text-brand-dark'
+                    : 'border-line bg-surface text-ink hover:bg-bg'
+                }`}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-brand-dark">
           신청은 누구나 가능하지만, 사회복지사 판단 하에 지원 필요·돌봄 공백·지역사회 서비스 연계가

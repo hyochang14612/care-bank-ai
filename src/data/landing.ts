@@ -1,37 +1,22 @@
-export interface HeroBanner {
-  id: string
-  eyebrow: string
-  message: string
-  icons: string[]
-  ctaLabel: string
-  ctaTo: string
+export const heroContent = {
+  message: '내가 가진 작은 자원이\n필요한 이웃에게 연결됩니다',
+  subtitle: '물품·재능·시간·공간을 나누고\n우리 동네 돌봄을 함께 만들어갑니다.',
+  ctaLabel: '내 자원 등록하기',
+  ctaTo: '/register',
 }
 
-export const heroBanners: HeroBanner[] = [
-  {
-    id: 'b1',
-    eyebrow: '지역 자원으로 시작하는 우리 동네 돌봄',
-    message: '내가 가진 자원으로\n우리 동네의 돌봄을 시작합니다.',
-    icons: ['💰', '🎁', '⏰'],
-    ctaLabel: '자원 등록하기',
-    ctaTo: '/register',
-  },
-  {
-    id: 'b2',
-    eyebrow: '이웃들의 진짜 이야기',
-    message: '작은 나눔이\n동네를 바꾸는 이야기를\n확인해보세요.',
-    icons: ['📰', '✨', '🧑‍🤝‍🧑'],
-    ctaLabel: '나눔 이야기 보기',
-    ctaTo: '/stories',
-  },
-  {
-    id: 'b3',
-    eyebrow: '언제든 기댈 수 있는 동네 연결망',
-    message: '도움이 필요할 때\n우리 동네 연결망을 이용하세요.',
-    icons: ['💬', '🧑‍💼', '🏠'],
-    ctaLabel: '돌봄 신청하기',
-    ctaTo: '/request',
-  },
+export const heroResourceIcons = [
+  { icon: '🎁', label: '물품 나눔' },
+  { icon: '✨', label: '재능 나눔' },
+  { icon: '⏰', label: '시간 봉사' },
+  { icon: '🏠', label: '공간 제공' },
+]
+
+export const homeValueSteps = [
+  { icon: '📝', label: '자원 등록' },
+  { icon: '🧑‍💼', label: '사회복지사 확인' },
+  { icon: '🤝', label: '이웃과 연결' },
+  { icon: '💚', label: 'CARE POINT 적립' },
 ]
 
 export const careIntro =

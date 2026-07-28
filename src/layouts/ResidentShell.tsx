@@ -2,12 +2,13 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAppData } from '../context/AppDataContext'
 
 const navItems = [
-  { to: '/', label: '홈', icon: '🏠', end: true },
-  { to: '/register', label: '자원 등록하기', icon: '🧺' },
-  { to: '/request', label: '돌봄 신청하기', icon: '🙋' },
-  { to: '/resources', label: '우리동네 자원', icon: '📦' },
-  { to: '/stories', label: '나눔 이야기', icon: '📰' },
-  { to: '/care-point', label: 'CARE POINT', icon: '💚' },
+  { to: '/', label: '홈', mobileLabel: '홈', icon: '🏠', end: true },
+  { to: '/about', label: '우리동네 통합돌봄 뱅크란?', mobileLabel: '소개', icon: 'ℹ️' },
+  { to: '/register', label: '자원 등록하기', mobileLabel: '자원등록', icon: '🧺' },
+  { to: '/request', label: '돌봄 신청하기', mobileLabel: '돌봄신청', icon: '🙋' },
+  { to: '/resources', label: '우리동네 자원', mobileLabel: '동네자원', icon: '📦' },
+  { to: '/stories', label: '돌봄 이야기', mobileLabel: '이야기', icon: '📰' },
+  { to: '/care-point', label: 'CARE POINT', mobileLabel: 'POINT', icon: '💚' },
 ]
 
 export function ResidentShell() {
@@ -49,7 +50,7 @@ export function ResidentShell() {
             )}
           </div>
 
-          <nav className="hidden items-center gap-1 sm:flex">
+          <nav className="hidden flex-wrap items-center gap-1 sm:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -72,7 +73,7 @@ export function ResidentShell() {
         <Outlet />
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 flex justify-around border-t border-line bg-surface/95 px-1 py-2 backdrop-blur sm:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 flex justify-around overflow-x-auto border-t border-line bg-surface/95 px-1 py-2 backdrop-blur sm:hidden">
         {navItems.map((item) => (
           <NavLink
             key={item.to}
@@ -85,7 +86,7 @@ export function ResidentShell() {
             }
           >
             <span className="text-lg">{item.icon}</span>
-            {item.label}
+            {item.mobileLabel}
           </NavLink>
         ))}
       </nav>

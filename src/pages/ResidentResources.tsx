@@ -2,24 +2,16 @@ import { useMemo, useState } from 'react'
 import { ResourceCard } from '../components/ResourceCard'
 import { SectionHeading } from '../components/SectionHeading'
 import { useAppData } from '../context/AppDataContext'
-import type { ResourceCategory } from '../data/types'
+import type { ResourceType } from '../data/types'
 
-const categories: (ResourceCategory | '전체')[] = [
-  '전체',
-  '위생관리',
-  '식생활',
-  '이동지원',
-  '주거환경',
-  '정서지원',
-  '교육문화',
-]
+const categories: (ResourceType | '전체')[] = ['전체', '물품 나눔', '재능 나눔', '시간 나눔', '공간 나눔']
 
 export function ResidentResources() {
   const { resources } = useAppData()
-  const [active, setActive] = useState<ResourceCategory | '전체'>('전체')
+  const [active, setActive] = useState<ResourceType | '전체'>('전체')
 
   const filtered = useMemo(
-    () => (active === '전체' ? resources : resources.filter((r) => r.category === active)),
+    () => (active === '전체' ? resources : resources.filter((r) => r.resourceType === active)),
     [active, resources],
   )
 

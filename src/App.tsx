@@ -3,6 +3,7 @@ import { AppDataProvider } from './context/AppDataContext'
 import { ResidentShell } from './layouts/ResidentShell'
 import { WorkerShell } from './layouts/WorkerShell'
 import { ResidentHome } from './pages/ResidentHome'
+import { About } from './pages/About'
 import { Register } from './pages/Register'
 import { CareRequest } from './pages/CareRequest'
 import { ResidentResources } from './pages/ResidentResources'
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route element={<ResidentShell />}>
           <Route path="/" element={<ResidentHome />} />
+          <Route path="about" element={<About />} />
           <Route path="register" element={<Register />} />
           <Route path="request" element={<CareRequest />} />
           <Route path="resources" element={<ResidentResources />} />
