@@ -138,12 +138,15 @@ export function AiChallenge() {
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-br from-mint to-mint/60 p-6">
-            <p className="text-xs font-bold text-brand-dark">AI 활용 후</p>
+          <div className="relative overflow-hidden rounded-3xl border border-blue/25 bg-gradient-to-br from-blue-soft to-surface p-6">
+            <span className="absolute right-4 top-4 rounded-full bg-blue px-2.5 py-1 text-[10px] font-bold tracking-wide text-white">
+              AI ENGINE
+            </span>
+            <p className="text-xs font-bold text-blue">AI 활용 후</p>
             <div className="mt-3 space-y-2">
               {afterSteps.map((s, i) => (
                 <div key={s} className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue text-xs font-semibold text-white">
                     {i + 1}
                   </span>
                   <span className="text-sm font-medium text-ink">{s}</span>
@@ -153,9 +156,10 @@ export function AiChallenge() {
           </div>
         </div>
 
-        <p className="rounded-2xl bg-gradient-to-r from-brand to-brand-dark px-6 py-5 text-center text-sm font-semibold leading-relaxed text-white sm:text-base">
-          AI는 복잡한 돌봄 정보를 분석하고 연결 후보를 제시하여, 사회복지사가 더 빠르고 정확한
-          판단을 할 수 있도록 지원합니다.
+        <p className="rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-brand-dark px-6 py-8 text-center text-base font-semibold leading-relaxed text-white shadow-lg sm:px-10 sm:py-10 sm:text-lg">
+          AI는 흩어진 지역 자원과 복합적인 돌봄 욕구를 이해하고,
+          <br className="hidden sm:block" /> 가장 적합한 연결 가능성을 찾아 사회복지사의 전문적인
+          판단을 지원합니다.
         </p>
       </section>
 
