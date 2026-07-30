@@ -3,6 +3,7 @@ import { AppDataProvider } from './context/AppDataContext'
 import { ResidentShell } from './layouts/ResidentShell'
 import { WorkerShell } from './layouts/WorkerShell'
 import { ResidentHome } from './pages/ResidentHome'
+import { AiChallenge } from './pages/AiChallenge'
 import { About } from './pages/About'
 import { Register } from './pages/Register'
 import { CareRequest } from './pages/CareRequest'
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route element={<ResidentShell />}>
           <Route path="/" element={<ResidentHome />} />
+          <Route path="ai-challenge" element={<AiChallenge />} />
           <Route path="about" element={<About />} />
           <Route path="register" element={<Register />} />
           <Route path="request" element={<CareRequest />} />

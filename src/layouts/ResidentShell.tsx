@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAppData } from '../context/AppDataContext'
 
 const navItems = [
+  { to: '/ai-challenge', label: 'AI 챌린지 해 프로토타입', mobileLabel: 'AI 챌린지', icon: '', highlight: true },
   { to: '/', label: '홈', mobileLabel: '홈', icon: '🏠', end: true },
   { to: '/about', label: '우리동네 통합돌봄 뱅크란?', mobileLabel: '소개', icon: 'ℹ️' },
   { to: '/register', label: '자원 등록하기', mobileLabel: '자원등록', icon: '🧺' },
@@ -28,7 +29,7 @@ export function ResidentShell() {
                   우리동네 통합돌봄 뱅크
                 </p>
                 <p className="truncate text-[11px] leading-tight text-subtle sm:text-xs">
-                  주민 화면 · Community Care Bank
+                  Community Care Bank
                 </p>
               </div>
             </Link>
@@ -51,20 +52,41 @@ export function ResidentShell() {
           </div>
 
           <nav className="hidden flex-wrap items-center gap-1 sm:flex">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                className={({ isActive }) =>
-                  `rounded-full px-4 py-2 text-sm font-medium transition ${
-                    isActive ? 'bg-brand text-white' : 'text-subtle hover:bg-bg hover:text-ink'
-                  }`
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {navItems.map((item) =>
+              item.highlight ? (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold ring-1 transition ${
+                      isActive
+                        ? 'bg-coral text-white ring-coral'
+                        : 'bg-coral-soft text-coral ring-coral/30 hover:bg-coral-soft/70'
+                    }`
+                  }
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-coral" />
+                  </span>
+                  {item.label}
+                </NavLink>
+              ) : (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    `rounded-full px-4 py-2 text-sm font-medium transition ${
+                      isActive ? 'bg-brand text-white' : 'text-subtle hover:bg-bg hover:text-ink'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ),
+            )}
           </nav>
         </div>
       </header>
@@ -81,11 +103,23 @@ export function ResidentShell() {
             end={item.end}
             className={({ isActive }) =>
               `flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1.5 text-[10px] font-medium transition ${
-                isActive ? 'text-brand-dark' : 'text-subtle'
+                item.highlight
+                  ? isActive
+                    ? 'bg-coral text-white'
+                    : 'bg-coral-soft text-coral'
+                  : isActive
+                    ? 'text-brand-dark'
+                    : 'text-subtle'
               }`
             }
           >
-            <span className="text-lg">{item.icon}</span>
+            {item.highlight ? (
+              <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-coral text-[9px] font-bold text-white">
+                AI
+              </span>
+            ) : (
+              <span className="text-lg">{item.icon}</span>
+            )}
             {item.mobileLabel}
           </NavLink>
         ))}
