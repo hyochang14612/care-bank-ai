@@ -1,7 +1,7 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const navItems = [
-  { to: '/ai-challenge', label: 'AI 챌린지 해 프로토타입', mobileLabel: 'AI 챌린지', icon: '', highlight: true },
+  { to: '/ai-challenge', label: 'AI 챌린지 프로토타입', mobileLabel: 'AI 챌린지', icon: '', highlight: true },
   { to: '/', label: '홈', mobileLabel: '홈', icon: '🏠', end: true },
   { to: '/about', label: '우리동네 통합돌봄 뱅크란?', mobileLabel: '소개', icon: 'ℹ️' },
   { to: '/register', label: '자원 등록하기', mobileLabel: '자원등록', icon: '🧺' },
@@ -47,18 +47,17 @@ export function ResidentShell() {
                   to={item.to}
                   end={item.end}
                   className={({ isActive }) =>
-                    `group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
+                    `nav-ai-glow group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
                       isActive
                         ? 'from-brand-dark to-coral shadow-lg'
                         : 'from-brand to-coral'
                     }`
                   }
                 >
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+                  <span className="rounded-full bg-white/25 px-1.5 py-0.5 text-xs font-extrabold tracking-wide">
+                    AI
                   </span>
-                  {item.label}
+                  챌린지 프로토타입
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
                 </NavLink>
               ) : (

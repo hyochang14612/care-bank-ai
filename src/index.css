@@ -66,3 +66,17 @@ body {
   border-color: var(--color-brand);
 }
 
+@keyframes nav-ai-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 168, 120, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 122, 89, 0.12);
+  }
+}
+
+.nav-ai-glow {
+  animation: nav-ai-glow 2.6s ease-in-out infinite;
+}
+

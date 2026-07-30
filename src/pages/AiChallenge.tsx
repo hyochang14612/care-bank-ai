@@ -4,13 +4,13 @@ import { SectionHeading } from '../components/SectionHeading'
 const needQuoteExample = '혼자 생활하면서 식사를 챙기기 어렵고 병원 방문도 힘듭니다.'
 const hiddenNeeds = ['식생활 지원 욕구', '이동 지원 욕구', '정서적 지원 욕구']
 
-const beforeSteps = ['사회복지사가 대상자의 욕구 확인', '지역 자원 검색', '적합한 서비스 탐색', '연계 결정']
+const beforeSteps = ['대상자 상황 확인', '지역 자원 검색', '사회복지사의 경험과 기억 중심 판단', '연계']
 const beforeProblems = [
-  '지역 자원 정보가 흩어져 있음',
-  '욕구와 자원 비교에 시간이 많이 필요함',
-  '다양한 표현 속 숨은 욕구 발견이 어려움',
+  '복합적인 욕구는 키워드 검색만으로 찾기 어려움',
+  '지역 자원이 흩어져 있음',
+  '담당자의 경험에 따라 연결 속도 차이 발생',
 ]
-const aiRoles = ['대상자 욕구 분석', '자원 내용 분석 및 자동 분류', '적합한 자원 추천', '추천 이유 제시']
+const afterSteps = ['대상자 욕구 분석', '자원 정보 분석', '의미 기반 매칭', '추천 이유 제공', '사회복지사 최종 판단']
 
 const processSteps = [
   {
@@ -25,8 +25,8 @@ const processSteps = [
   },
   {
     icon: '✨',
-    title: 'AI 기반 자원 분석 및 추천',
-    body: 'AI가 등록된 자원 정보와 저장된 대상자의 돌봄 욕구 데이터를 분석하여 적합한 연결 후보를 추천합니다.',
+    title: 'AI 기반 욕구·자원 분석 및 연결 추천',
+    body: 'AI가 대상자의 욕구 정보와 등록된 지역 자원을 분석하여 적합한 연결 후보를 제안합니다.',
   },
   {
     icon: '🤝',
@@ -37,17 +37,23 @@ const processSteps = [
 
 const futurePlans = [
   {
-    title: 'AI 기반 자원 자동 분류',
-    body: '주민과 기관이 등록한 자원 내용을 분석하여 유형·대상·활용 분야를 자동 정리',
+    title: 'AI 기반 자원 이해',
+    body: '주민이 등록한 자원 설명을 분석하여 자원 유형 자동 분류, 활용 대상 분석, 검색 태그 자동 생성을 지원합니다.',
   },
   {
-    title: 'AI 기반 욕구 분석 지원',
-    body: '사회복지사가 기록한 상담 내용을 분석하여 복합적인 욕구 파악 지원',
+    title: 'AI 기반 욕구-자원 매칭',
+    body: '사회복지사가 기록한 대상자의 상황을 분석하여 복합적인 욕구를 파악하고, 적합한 지역 자원을 추천합니다. 최종 연계는 사회복지사가 판단합니다.',
   },
   {
-    title: '사회복지 업무 지원',
-    body: '연계 기록 정리, 서비스 결과 요약, 사례관리 업무 지원',
+    title: 'AI 기반 복지 업무 지원',
+    body: '연계 기록, 사례관리 기록 초안, 나눔 결과 요약 등 사회복지사의 현장 업무를 지원합니다.',
   },
+]
+
+const whyUsCards = [
+  { icon: '📍', title: '지역 기반', body: '복지관의 실제 지역 자원과 사례관리 경험 기반' },
+  { icon: '✨', title: 'AI 기반', body: '흩어진 자원과 복합적인 욕구를 분석하여 연결' },
+  { icon: '🤝', title: '사람 중심', body: 'AI 추천 + 사회복지사 최종 판단' },
 ]
 
 export function AiChallenge() {
@@ -99,18 +105,22 @@ export function AiChallenge() {
         </div>
       </section>
 
-      <section className="space-y-6">
-        <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">
-          AI는 복잡한 돌봄 연결 과정을 지원합니다.
-        </h2>
+      <section className="space-y-8 rounded-[2rem] bg-surface p-6 shadow-card-hover ring-2 ring-brand/15 sm:p-10">
+        <div className="space-y-2">
+          <p className="text-xs font-bold tracking-wide text-brand-dark">WHY AI</p>
+          <h2 className="text-3xl font-extrabold text-ink sm:text-4xl">AI가 필요한 이유</h2>
+          <p className="whitespace-pre-line text-base leading-relaxed text-subtle sm:text-lg">
+            {'돌봄 연결은 단순 검색이 아니라,\n주민의 상황과 지역 자원을 이해하는 과정입니다.'}
+          </p>
+        </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="rounded-3xl bg-surface p-6 shadow-card">
+          <div className="rounded-3xl border border-line bg-bg p-6">
             <p className="text-xs font-bold text-subtle">기존 과정</p>
             <div className="mt-3 space-y-2">
               {beforeSteps.map((s, i) => (
                 <div key={s} className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-bg text-xs font-semibold text-subtle">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-surface text-xs font-semibold text-subtle">
                     {i + 1}
                   </span>
                   <span className="text-sm text-ink">{s}</span>
@@ -128,34 +138,25 @@ export function AiChallenge() {
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-mint p-6">
+          <div className="rounded-3xl bg-gradient-to-br from-mint to-mint/60 p-6">
             <p className="text-xs font-bold text-brand-dark">AI 활용 후</p>
-            <p className="mt-3 text-sm leading-relaxed text-ink">
-              사회복지사가 등록한 대상자의 욕구 정보와 지역 내 등록된 자원 정보를 AI가 분석합니다.
-            </p>
-            <p className="mt-4 text-xs font-bold text-brand-dark">AI 역할</p>
-            <div className="mt-2 space-y-2">
-              {aiRoles.map((role, i) => (
-                <div key={role} className="flex items-center gap-2">
+            <div className="mt-3 space-y-2">
+              {afterSteps.map((s, i) => (
+                <div key={s} className="flex items-center gap-2">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white">
                     {i + 1}
                   </span>
-                  <span className="text-sm font-medium text-ink">{role}</span>
+                  <span className="text-sm font-medium text-ink">{s}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-line bg-surface p-5">
-          <p className="text-sm font-semibold text-ink">
-            AI가 대상자를 판단하거나 서비스를 결정하지 않습니다.
-          </p>
-          <p className="mt-1.5 text-sm leading-relaxed text-subtle">
-            AI는 사회복지사의 연결 판단을 지원하는 보조 도구이며, 최종 연계 여부는 사회복지사가
-            결정합니다.
-          </p>
-        </div>
+        <p className="rounded-2xl bg-gradient-to-r from-brand to-brand-dark px-6 py-5 text-center text-sm font-semibold leading-relaxed text-white sm:text-base">
+          AI는 복잡한 돌봄 정보를 분석하고 연결 후보를 제시하여, 사회복지사가 더 빠르고 정확한
+          판단을 할 수 있도록 지원합니다.
+        </p>
       </section>
 
       <section className="space-y-6">
@@ -210,9 +211,22 @@ export function AiChallenge() {
           ))}
         </div>
         <p className="rounded-2xl bg-mint px-5 py-4 text-sm font-medium text-brand-dark">
-          AI는 지역의 자원과 돌봄 욕구를 더 빠르고 정확하게 연결하여, 사회복지사의 전문적인 판단을
-          강화합니다.
+          AI는 흩어진 지역 자원과 복합적인 돌봄 욕구를 분석하여 연결 가능성을 발견하고,
+          사회복지사의 전문적인 판단과 현장 대응을 강화합니다.
         </p>
+      </section>
+
+      <section className="space-y-6">
+        <SectionHeading title="왜 우리동네 통합돌봄 뱅크인가?" />
+        <div className="grid gap-4 sm:grid-cols-3">
+          {whyUsCards.map((card) => (
+            <div key={card.title} className="rounded-3xl bg-surface p-6 text-center shadow-card">
+              <span className="text-2xl">{card.icon}</span>
+              <h3 className="mt-3 text-base font-bold text-ink">{card.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-subtle">{card.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   )
