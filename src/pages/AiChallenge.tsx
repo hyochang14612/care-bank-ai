@@ -107,8 +107,15 @@ export function AiChallenge() {
 
       <section className="space-y-8 rounded-[2rem] bg-surface p-6 shadow-card-hover ring-2 ring-brand/15 sm:p-10">
         <div className="space-y-2">
-          <p className="text-xs font-bold tracking-wide text-brand-dark">WHY AI</p>
-          <h2 className="text-3xl font-extrabold text-ink sm:text-4xl">AI가 필요한 이유</h2>
+          <p className="inline-block rounded-full bg-mint px-3 py-1 text-xs font-bold tracking-wide text-brand-dark">
+            WHY AI
+          </p>
+          <h2 className="text-3xl font-extrabold sm:text-4xl">
+            <span className="relative inline-block">
+              <span className="absolute inset-x-0 bottom-0.5 h-3 rounded bg-mint sm:h-4" />
+              <span className="relative text-brand-dark">AI가 필요한 이유</span>
+            </span>
+          </h2>
           <p className="whitespace-pre-line text-base leading-relaxed text-subtle sm:text-lg">
             {'돌봄 연결은 단순 검색이 아니라,\n주민의 상황과 지역 자원을 이해하는 과정입니다.'}
           </p>
@@ -156,11 +163,14 @@ export function AiChallenge() {
           </div>
         </div>
 
-        <p className="rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-brand-dark px-6 py-8 text-center text-base font-semibold leading-relaxed text-white shadow-lg sm:px-10 sm:py-10 sm:text-lg">
-          AI는 흩어진 지역 자원과 복합적인 돌봄 욕구를 이해하고,
-          <br className="hidden sm:block" /> 가장 적합한 연결 가능성을 찾아 사회복지사의 전문적인
-          판단을 지원합니다.
-        </p>
+        <div className="rounded-3xl border border-brand/25 bg-gradient-to-br from-mint to-mint/40 px-6 py-8 text-center shadow-card sm:px-10 sm:py-10">
+          <p className="text-xs font-bold tracking-wide text-brand-dark">✨ AI CORE VALUE</p>
+          <p className="mt-2 text-base font-semibold leading-relaxed text-brand-dark sm:text-lg">
+            AI는 흩어진 지역 자원과 복합적인 돌봄 욕구를 이해하고,
+            <br className="hidden sm:block" /> 가장 적합한 연결 가능성을 찾아 사회복지사의 전문적인
+            판단을 지원합니다.
+          </p>
+        </div>
       </section>
 
       <section className="space-y-6">
