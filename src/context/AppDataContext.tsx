@@ -7,12 +7,11 @@ import {
 } from '../data/mock'
 import type { CareRequest, Connection, PendingMatch, PointRecord, SharedResource } from '../data/types'
 
-export type UserRole = 'guest' | 'resident' | 'worker'
+export type UserRole = 'guest' | 'worker'
 
 interface AppDataContextValue {
   role: UserRole
   residentName: string
-  loginResident: (name?: string) => void
   loginWorker: () => void
   logout: () => void
 
@@ -35,7 +34,7 @@ const AppDataContext = createContext<AppDataContextValue | null>(null)
 
 export function AppDataProvider({ children }: { children: ReactNode }) {
   const [role, setRole] = useState<UserRole>('guest')
-  const [residentName, setResidentName] = useState('이웃 주민')
+  const residentName = '이웃 주민'
 
   const [connections, setConnections] = useState<Connection[]>(initialConnections)
   const [pointRecords, setPointRecords] = useState<PointRecord[]>(initialPointRecords)
@@ -43,10 +42,6 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
   const [resources, setResources] = useState<SharedResource[]>(initialResources)
   const [pendingMatches, setPendingMatches] = useState<PendingMatch[]>([])
 
-  const loginResident = (name?: string) => {
-    if (name) setResidentName(name)
-    setRole('resident')
-  }
   const loginWorker = () => setRole('worker')
   const logout = () => setRole('guest')
 
@@ -77,7 +72,6 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
       value={{
         role,
         residentName,
-        loginResident,
         loginWorker,
         logout,
         connections,

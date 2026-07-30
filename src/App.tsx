@@ -10,7 +10,6 @@ import { CareRequest } from './pages/CareRequest'
 import { ResidentResources } from './pages/ResidentResources'
 import { Stories } from './pages/Stories'
 import { CarePointBank } from './pages/CarePointBank'
-import { Login } from './pages/Login'
 import { WorkerLogin } from './pages/WorkerLogin'
 import { AiMatching } from './pages/worker/AiMatching'
 import { ConnectionManagement } from './pages/worker/ConnectionManagement'
@@ -31,7 +30,6 @@ function App() {
           <Route path="care-point" element={<CarePointBank />} />
         </Route>
 
-        <Route path="login" element={<Login />} />
         <Route path="worker" element={<WorkerLogin />} />
         <Route element={<WorkerShell />}>
           <Route path="worker/ai-matching" element={<AiMatching />} />

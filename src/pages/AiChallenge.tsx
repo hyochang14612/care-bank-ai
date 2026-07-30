@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/SectionHeading'
-import { Stepper } from '../components/Stepper'
 
 const needQuoteExample = '혼자 생활하면서 식사를 챙기기 어렵고 병원 방문도 힘듭니다.'
 const hiddenNeeds = ['식생활 지원 욕구', '이동 지원 욕구', '정서적 지원 욕구']
@@ -13,11 +12,27 @@ const beforeProblems = [
 ]
 const aiRoles = ['대상자 욕구 분석', '자원 내용 분석 및 자동 분류', '적합한 자원 추천', '추천 이유 제시']
 
-const demoSteps = [
-  { label: '욕구 등록', icon: '📝' },
-  { label: 'AI 욕구 분석', icon: '🔍' },
-  { label: '자원 분석·추천', icon: '🤝' },
-  { label: '최종 연계', icon: '✅' },
+const processSteps = [
+  {
+    icon: '🧺',
+    title: '지역주민 자원 등록',
+    body: '주민이 가진 물품·재능·시간·공간을 등록합니다.',
+  },
+  {
+    icon: '🧑‍💼',
+    title: '사회복지사 확인',
+    body: '등록된 자원은 사회복지사가 확인하고 지역 돌봄 자원으로 관리합니다.',
+  },
+  {
+    icon: '✨',
+    title: 'AI 기반 자원 분석 및 추천',
+    body: 'AI가 등록된 자원 정보와 저장된 대상자의 돌봄 욕구 데이터를 분석하여 적합한 연결 후보를 추천합니다.',
+  },
+  {
+    icon: '🤝',
+    title: '사회복지사 최종 검토 및 연계',
+    body: '사회복지사가 AI 추천 결과와 대상자의 상황을 확인하고 최종 연결합니다.',
+  },
 ]
 
 const futurePlans = [
@@ -35,26 +50,7 @@ const futurePlans = [
   },
 ]
 
-const defaultNeedInput = '독거 상태이며 외출이 어렵고,\n식사를 챙기는 데 어려움이 있습니다.'
-
 export function AiChallenge() {
-  const [step, setStep] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [needInput, setNeedInput] = useState(defaultNeedInput)
-
-  const advance = (next: number, delay = 1200) => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      setStep(next)
-    }, delay)
-  }
-
-  const reset = () => {
-    setStep(1)
-    setLoading(false)
-  }
-
   return (
     <div className="space-y-16">
       <section className="space-y-3">
@@ -165,145 +161,35 @@ export function AiChallenge() {
       <section className="space-y-6">
         <SectionHeading
           title="자원등록 및 연계 프로토타입 진행하기"
-          description="아래 버튼을 눌러 사회복지사 욕구 등록부터 최종 연계까지 직접 진행해보세요"
+          description="지역 주민이 가진 자원을 등록하고, AI 기반 분석을 통해 필요한 이웃과 연결되는 과정을 확인합니다."
         />
 
-        <div className="rounded-3xl bg-surface p-6 shadow-card">
-          <Stepper steps={demoSteps} current={step} />
-
-          <div className="mt-8">
-            {step === 1 && (
-              <div className="space-y-4">
-                <p className="text-sm font-bold text-ink">Step 1. 대상자 욕구 등록</p>
-                <p className="text-xs text-subtle">사회복지사 입력 화면 · 대상자 상황을 기록해주세요</p>
-                <textarea
-                  className="input min-h-24 resize-none"
-                  value={needInput}
-                  onChange={(e) => setNeedInput(e.target.value)}
-                />
-                <button
-                  onClick={() => advance(2)}
-                  disabled={loading}
-                  className="w-full rounded-xl bg-brand py-3 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-60 sm:w-auto sm:px-6"
-                >
-                  {loading ? 'AI가 욕구를 분석하고 있어요…' : 'AI 욕구 분석하기'}
-                </button>
-              </div>
-            )}
-
-            {step === 2 && !loading && (
-              <div className="space-y-4">
-                <p className="text-sm font-bold text-ink">Step 2. AI 욕구 분석 결과</p>
-                <div className="rounded-2xl bg-mint p-5">
-                  <p className="text-xs font-bold text-brand-dark">주요 욕구</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {['식생활 지원', '이동 지원', '정서 지원 가능성'].map((n) => (
-                      <span
-                        key={n}
-                        className="rounded-full bg-surface px-3.5 py-1.5 text-sm font-semibold text-brand-dark shadow-card"
-                      >
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="mt-4 rounded-xl bg-surface p-4 text-sm leading-relaxed text-ink">
-                    &ldquo;대상자의 상황에서 식생활 지원과 생활 지원 서비스 연결 가능성이
-                    높습니다.&rdquo;
-                  </p>
-                </div>
-                <button
-                  onClick={() => advance(3)}
-                  disabled={loading}
-                  className="w-full rounded-xl bg-brand py-3 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-60 sm:w-auto sm:px-6"
-                >
-                  등록 자원 분석하기 →
-                </button>
-              </div>
-            )}
-
-            {step === 3 && !loading && (
-              <div className="space-y-4">
-                <p className="text-sm font-bold text-ink">Step 3. 등록 자원 분석 및 추천</p>
-                <div className="rounded-2xl bg-bg p-5">
-                  <p className="text-xs font-bold text-subtle">등록된 자원</p>
-                  <p className="mt-1.5 text-sm font-medium text-ink">
-                    &ldquo;월 2회 어르신 무료 이미용 서비스를 제공합니다.&rdquo;
-                  </p>
-
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl bg-surface p-4">
-                      <p className="text-xs font-bold text-blue">AI 분석</p>
-                      <p className="mt-1.5 text-sm text-ink">자원 유형: <strong>재능 나눔</strong></p>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {['#이미용지원', '#어르신돌봄', '#생활지원'].map((tag) => (
-                          <span key={tag} className="rounded-full bg-blue-soft px-2.5 py-1 text-xs font-medium text-blue">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="rounded-xl bg-surface p-4">
-                      <p className="text-xs font-bold text-brand-dark">AI 추천 결과</p>
-                      <p className="mt-1.5 text-sm font-semibold text-ink">추천 자원: 이미용 재능 나눔</p>
-                      <ul className="mt-2 space-y-1 text-xs text-subtle">
-                        <li>✅ 대상 적합성</li>
-                        <li>✅ 지역 적합성</li>
-                        <li>✅ 서비스 유형 적합성</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => advance(4)}
-                  disabled={loading}
-                  className="w-full rounded-xl bg-brand py-3 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-60 sm:w-auto sm:px-6"
-                >
-                  사회복지사에게 연계 요청하기 →
-                </button>
-              </div>
-            )}
-
-            {step === 4 && !loading && (
-              <div className="space-y-5">
-                <p className="text-sm font-bold text-ink">Step 4. 사회복지사 최종 연계</p>
-                <div className="flex items-center justify-center gap-2 rounded-2xl bg-bg p-6">
-                  {['AI 추천', '사회복지사 검토', '서비스 연계 완료'].map((label, i, arr) => (
-                    <div key={label} className="flex items-center gap-2">
-                      <div className="flex flex-col items-center gap-1.5">
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-2xl text-sm font-bold ${
-                            i === arr.length - 1 ? 'bg-brand text-white' : 'bg-mint text-brand-dark'
-                          }`}
-                        >
-                          {i === arr.length - 1 ? '✓' : i + 1}
-                        </div>
-                        <span className="whitespace-nowrap text-xs font-medium text-ink">{label}</span>
-                      </div>
-                      {i !== arr.length - 1 && <span className="text-line">→</span>}
-                    </div>
-                  ))}
-                </div>
-                <p className="rounded-2xl bg-mint px-5 py-4 text-center text-sm font-medium text-brand-dark">
-                  AI는 연결 가능성을 분석하고, 최종 판단과 책임은 사회복지사가 수행합니다.
-                </p>
-                <button
-                  onClick={reset}
-                  className="w-full rounded-xl border border-line py-3 text-sm font-semibold text-ink transition hover:bg-bg sm:w-auto sm:px-6"
-                >
-                  처음부터 다시 보기
-                </button>
-              </div>
-            )}
-
-            {loading && (
-              <div className="flex flex-col items-center gap-3 py-10 text-center">
-                <span className="flex h-12 w-12 animate-pulse items-center justify-center rounded-2xl bg-mint text-2xl">
-                  🔍
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {processSteps.map((step, i) => (
+            <div key={step.title} className="relative rounded-3xl bg-surface p-5 shadow-card">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-mint text-sm font-bold text-brand-dark">
+                {i + 1}
+              </span>
+              <span className="mt-3 block text-2xl">{step.icon}</span>
+              <h3 className="mt-2 text-sm font-semibold text-ink">{step.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-subtle">{step.body}</p>
+              {i !== processSteps.length - 1 && (
+                <span className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-lg text-line lg:block">
+                  →
                 </span>
-                <p className="text-sm font-medium text-subtle">AI가 데이터를 분석하고 있어요…</p>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center gap-3 rounded-3xl bg-gradient-to-br from-brand to-brand-dark px-6 py-10 text-center text-white">
+          <Link
+            to="/register"
+            className="rounded-full bg-white px-10 py-4 text-lg font-bold text-brand-dark shadow-lg transition hover:bg-mint"
+          >
+            자원 등록하기
+          </Link>
+          <p className="text-sm text-white/85">내가 가진 작은 자원이 필요한 이웃에게 연결됩니다.</p>
         </div>
       </section>
 
@@ -324,7 +210,8 @@ export function AiChallenge() {
           ))}
         </div>
         <p className="rounded-2xl bg-mint px-5 py-4 text-sm font-medium text-brand-dark">
-          AI는 사회복지사를 대체하는 것이 아니라, 현장의 판단과 연결을 지원하는 기술입니다.
+          AI는 지역의 자원과 돌봄 욕구를 더 빠르고 정확하게 연결하여, 사회복지사의 전문적인 판단을
+          강화합니다.
         </p>
       </section>
     </div>

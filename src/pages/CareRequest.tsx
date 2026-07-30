@@ -14,7 +14,7 @@ function todayLabel() {
 }
 
 export function CareRequest() {
-  const { role, residentName, addCareRequest } = useAppData()
+  const { residentName, addCareRequest } = useAppData()
   const [submitted, setSubmitted] = useState(false)
   const [form, setForm] = useState({
     applicantType: '본인' as ApplicantType,
@@ -26,23 +26,6 @@ export function CareRequest() {
     contactTime: '평일 오전',
     urgency: '일반' as UrgencyLevel,
   })
-
-  if (role === 'guest') {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 rounded-3xl bg-surface p-8 text-center shadow-card">
-        <span className="text-3xl">🔒</span>
-        <h2 className="text-lg font-bold text-ink">로그인이 필요해요</h2>
-        <p className="text-sm text-subtle">돌봄 신청은 지역주민 로그인 후 이용할 수 있어요.</p>
-        <Link
-          to="/login"
-          state={{ from: '/request' }}
-          className="inline-block rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-dark"
-        >
-          로그인하러 가기
-        </Link>
-      </div>
-    )
-  }
 
   const finalNeedType = form.needType === '기타' ? form.customNeedType.trim() || '기타' : form.needType
 

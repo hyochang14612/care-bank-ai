@@ -1,5 +1,4 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
-import { useAppData } from '../context/AppDataContext'
 
 const navItems = [
   { to: '/ai-challenge', label: 'AI 챌린지 해 프로토타입', mobileLabel: 'AI 챌린지', icon: '', highlight: true },
@@ -13,8 +12,6 @@ const navItems = [
 ]
 
 export function ResidentShell() {
-  const { role, residentName, logout } = useAppData()
-
   return (
     <div className="min-h-svh bg-bg">
       <header className="sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur">
@@ -34,21 +31,12 @@ export function ResidentShell() {
               </div>
             </Link>
 
-            {role === 'resident' ? (
-              <button
-                onClick={logout}
-                className="shrink-0 whitespace-nowrap rounded-full border border-line px-3 py-2 text-xs font-medium text-subtle transition hover:bg-bg hover:text-ink sm:px-4 sm:text-sm"
-              >
-                {residentName}님 · 로그아웃
-              </button>
-            ) : (
-              <Link
-                to="/login"
-                className="shrink-0 whitespace-nowrap rounded-full border border-line px-3 py-2 text-xs font-medium text-subtle transition hover:bg-bg hover:text-ink sm:px-4 sm:text-sm"
-              >
-                로그인하기
-              </Link>
-            )}
+            <Link
+              to="/worker"
+              className="shrink-0 whitespace-nowrap rounded-full border border-line px-3 py-2 text-xs font-medium text-subtle transition hover:bg-bg hover:text-ink sm:px-4 sm:text-sm"
+            >
+              사회복지사 로그인
+            </Link>
           </div>
 
           <nav className="hidden flex-wrap items-center gap-1 sm:flex">
@@ -59,18 +47,19 @@ export function ResidentShell() {
                   to={item.to}
                   end={item.end}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold ring-1 transition ${
+                    `group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
                       isActive
-                        ? 'bg-coral text-white ring-coral'
-                        : 'bg-coral-soft text-coral ring-coral/30 hover:bg-coral-soft/70'
+                        ? 'from-brand-dark to-coral shadow-lg'
+                        : 'from-brand to-coral'
                     }`
                   }
                 >
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-coral" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
                   </span>
                   {item.label}
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-500 group-hover:translate-x-full" />
                 </NavLink>
               ) : (
                 <NavLink
@@ -105,8 +94,8 @@ export function ResidentShell() {
               `flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1.5 text-[10px] font-medium transition ${
                 item.highlight
                   ? isActive
-                    ? 'bg-coral text-white'
-                    : 'bg-coral-soft text-coral'
+                    ? 'bg-gradient-to-r from-brand-dark to-coral text-white'
+                    : 'bg-gradient-to-r from-brand to-coral text-white'
                   : isActive
                     ? 'text-brand-dark'
                     : 'text-subtle'
@@ -114,7 +103,7 @@ export function ResidentShell() {
             }
           >
             {item.highlight ? (
-              <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-coral text-[9px] font-bold text-white">
+              <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/25 text-[9px] font-bold text-white">
                 AI
               </span>
             ) : (
