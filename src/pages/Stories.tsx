@@ -9,10 +9,34 @@ const tagStyle: Record<string, { gradient: string; chip: string }> = {
   '지역 변화': { gradient: 'from-coral to-brand-dark', chip: 'bg-coral-soft text-coral' },
 }
 
+const storyCycle = [
+  { icon: '🧺', label: '자원 등록' },
+  { icon: '✨', label: 'AI 분석 및 추천' },
+  { icon: '🤝', label: '사회복지사 최종 연계' },
+  { icon: '📰', label: '나눔과 돌봄 이야기 생성' },
+]
+
 export function Stories() {
   return (
     <div className="space-y-6">
-      <SectionHeading title="돌봄 이야기" description="우리 동네 돌봄이 만든 따뜻한 변화를 전해드려요" />
+      <SectionHeading
+        title="나눔과 돌봄 이야기"
+        description="우리 동네 돌봄이 만든 따뜻한 변화를 전해드려요"
+      />
+
+      <section className="flex flex-wrap items-center justify-center gap-2 rounded-2xl bg-surface p-5 shadow-card sm:gap-4">
+        {storyCycle.map((step, i) => (
+          <div key={step.label} className="flex items-center gap-2 sm:gap-4">
+            <div className="flex flex-col items-center gap-1">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-mint text-lg">
+                {step.icon}
+              </span>
+              <span className="text-xs font-medium text-ink">{step.label}</span>
+            </div>
+            {i !== storyCycle.length - 1 && <span className="text-line">→</span>}
+          </div>
+        ))}
+      </section>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {newsItems.map((item) => (

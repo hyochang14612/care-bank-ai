@@ -7,7 +7,7 @@ const navItems = [
   { to: '/register', label: '자원 등록하기', mobileLabel: '자원등록', icon: '🧺' },
   { to: '/request', label: '돌봄 신청하기', mobileLabel: '돌봄신청', icon: '🙋' },
   { to: '/resources', label: '우리동네 자원', mobileLabel: '동네자원', icon: '📦' },
-  { to: '/stories', label: '돌봄 이야기', mobileLabel: '이야기', icon: '📰' },
+  { to: '/stories', label: '나눔과 돌봄 이야기', mobileLabel: '나눔이야기', icon: '📰' },
   { to: '/care-point', label: 'CARE POINT', mobileLabel: 'POINT', icon: '💚' },
 ]
 
