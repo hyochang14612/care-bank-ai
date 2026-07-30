@@ -1,0 +1,44 @@
+import { Route, Routes } from 'react-router-dom'
+import { AppDataProvider } from './context/AppDataContext'
+import { ResidentShell } from './layouts/ResidentShell'
+import { WorkerShell } from './layouts/WorkerShell'
+import { ResidentHome } from './pages/ResidentHome'
+import { AiChallenge } from './pages/AiChallenge'
+import { About } from './pages/About'
+import { Register } from './pages/Register'
+import { CareRequest } from './pages/CareRequest'
+import { ResidentResources } from './pages/ResidentResources'
+import { Stories } from './pages/Stories'
+import { CarePointBank } from './pages/CarePointBank'
+import { Login } from './pages/Login'
+import { AiMatching } from './pages/worker/AiMatching'
+import { ConnectionManagement } from './pages/worker/ConnectionManagement'
+import { Stats } from './pages/worker/Stats'
+
+function App() {
+  return (
+    <AppDataProvider>
+      <Routes>
+        <Route element={<ResidentShell />}>
+          <Route path="/" element={<ResidentHome />} />
+          <Route path="ai-challenge" element={<AiChallenge />} />
+          <Route path="about" element={<About />} />
+          <Route path="register" element={<Register />} />
+          <Route path="request" element={<CareRequest />} />
+          <Route path="resources" element={<ResidentResources />} />
+          <Route path="stories" element={<Stories />} />
+          <Route path="care-point" element={<CarePointBank />} />
+        </Route>
+
+        <Route path="worker" element={<Login />} />
+        <Route element={<WorkerShell />}>
+          <Route path="worker/ai-matching" element={<AiMatching />} />
+          <Route path="worker/connections" element={<ConnectionManagement />} />
+          <Route path="worker/stats" element={<Stats />} />
+        </Route>
+      </Routes>
+    </AppDataProvider>
+  )
+}
+
+export default App
